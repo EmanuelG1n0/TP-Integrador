@@ -2,14 +2,14 @@
   <div class="container mt-5">
     <div class="row">
       <div class="col-md-6">
-        <img :src="product.image" alt="Product image" class="img-fluid rounded" />
-      </div>
-      <div class="col-md-6">
         <h1>{{ product.title }}</h1>
-        <p>{{ product.description }}</p>
-        <p class="h4">{{ product.price }} USD</p>
+        <div class="col-md-6">
+          <img :src="product.image" alt="Product image" class="img-fluid rounded" />
+        </div>
         <p v-if="product.stock > 0" class="text-success">Stock: {{ product.stock }}</p>
         <p v-else class="text-danger">Out of Stock</p>
+        <p class="h4">{{ product.price }} USD</p>
+        <p>{{ product.description }}</p>
         <button @click="addToCart" :disabled="product.stock === 0" class="btn btn-success btn-lg mt-3">
           Add to Cart
         </button>
