@@ -1,12 +1,10 @@
-
-
 <template>
   <div id="app">
     <nav>
-      <router-link to="/Home">Home</router-link>
-      <router-link to="/About">About</router-link>
+      <router-link to="/">Lista de Productos</router-link>
+      <router-link to="/product/add">Agregar Producto</router-link>
     </nav>
-    <router-view></router-view>
+    <router-view></router-view> <!-- Muestra la vista activa según la ruta -->
   </div>
 </template>
 
@@ -16,17 +14,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style>
+nav {
+  margin-bottom: 20px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+nav a {
+  margin-right: 15px;
 }
 </style>
