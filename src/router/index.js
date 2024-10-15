@@ -3,12 +3,14 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import CatalogView from '../views/CatalogView.vue';
 import CartView from '../views/CartView.vue';
+import RegisterView from '../views/RegisterView.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
-  { path: '/login', name: 'Login', component: LoginView },
+  { path: '/register', name: 'Register', component: RegisterView,  meta: { requiresAuth: true }},
+  { path: '/login', name: 'Login', component: LoginView,  meta: { requiresAuth: true }},
   { path: '/catalog', name: 'Catalog', component: CatalogView },
-  { path: '/cart', name: 'Cart', component: CartView, meta: { requiresAuth: true } }
+  { path: '/cart', name: 'Cart', component: CartView }
 ];
 
 const router = createRouter({

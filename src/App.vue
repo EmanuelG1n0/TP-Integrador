@@ -48,7 +48,7 @@ main {
 /* Asegúrate de que el header y footer tengan una buena separación del contenido principal */
 header, footer {
   background-color: #f8f9fa;
-  padding: 10px;
+  padding: 5px;
 }
 
 header {
@@ -56,7 +56,7 @@ header {
 }
 
 footer {
-  border-top: 1px solid #ddd;
-  margin-top: 20px;
+  border-top: 2px solid #ddd;
+  margin-top: 50px;
 }
 </style>

@@ -1,13 +1,31 @@
 <template>
-  <div>
-    <main>
-      <h2>Login</h2>
-      <form @submit.prevent="login">
-        <input v-model="username" type="text" placeholder="Username" />
-        <input v-model="password" type="password" placeholder="Password" />
-        <button type="submit">Login</button>
-      </form>
-    </main>
+  <div class="login-container">
+    <v-card class="mx-auto" max-width="500">
+      <v-card-title class="text-center">Iniciar Sesión</v-card-title>
+      <v-card-text>
+        <!-- Formulario de login -->
+        <form @submit.prevent="login">
+          <v-text-field
+            label="Nombre de usuario"
+            v-model="username"
+            required
+            placeholder="Username"
+          ></v-text-field>
+
+          <v-text-field
+            label="Contraseña"
+            v-model="password"
+            required
+            type="password"
+            placeholder="Password"
+          ></v-text-field>
+
+          <v-btn color="primary" type="submit" class="mt-3" block>
+            Login
+          </v-btn>
+        </form>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
