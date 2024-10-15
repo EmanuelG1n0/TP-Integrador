@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Header - siempre visible -->
-    <Header />
+    <NavBar />
     
     <!-- Contenedor principal de la aplicación -->
     <main>
@@ -15,13 +15,14 @@
 </template>
 
 <script>
-import Header from './components/Header.vue';
+import NavBar from './components/NavBar.vue';
 import Footer from './components/Footer.vue';
+
 
 export default {
   name: 'App',
   components: {
-    Header,
+    NavBar,
     Footer
   }
 };
