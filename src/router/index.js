@@ -4,13 +4,15 @@ import LoginView from '../views/LoginView.vue';
 import CatalogView from '../views/CatalogView.vue';
 import CartView from '../views/CartView.vue';
 import RegisterView from '../views/RegisterView.vue';
+import AboutView from '../views/AboutView.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
-  { path: '/register', name: 'Register', component: RegisterView,  meta: { requiresAuth: true }},
-  { path: '/login', name: 'Login', component: LoginView,  meta: { requiresAuth: true }},
+  { path: '/register', name: 'Register', component: RegisterView, meta: { requiresAuth: true } },
+  { path: '/login', name: 'Login', component: LoginView, meta: { requiresAuth: true } },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
-  { path: '/cart', name: 'Cart', component: CartView }
+  { path: '/cart', name: 'Cart', component: CartView },
+  { path: '/about', name: 'About', component: AboutView },
 ];
 
 const router = createRouter({
