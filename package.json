@@ -9,18 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD:package.json
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
-    "bootstrap-vue": "^2.23.1",
     "vue": "^3.5.10",
     "vue-router": "^4.4.5",
-    "vuetify": "^3.7.2"
-=======
-    "bootstrap": "^5.3.3",
-    "vue": "^3.5.10",
-    "vue-router": "^4.4.5"
->>>>>>> 02b9cf6252e6213574d0fafaf81b96a1a8179c70:E-Commerce/package.json
+    "vuetify": "^3.7.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
