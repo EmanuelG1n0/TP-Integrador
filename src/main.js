@@ -1,25 +1,19 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import { BootstrapVue3 } from 'bootstrap-vue-3';
 import 'bootstrap/dist/css/bootstrap.css';
-import './assets/css/style.css'; // Tus estilos personalizados
+import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
+import vuetify from './plugins/vuetify';
+import '@/assets/style.css';
+import { createPinia } from 'pinia'; // Correcto, aquí lo estás creando.
 
-// Importar Vuetify y los estilos
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // Importar estilos globales de Vuetify
-import * as components from 'vuetify/components'; // Importar componentes de Vuetify
-import * as directives from 'vuetify/directives'; // Importar directivas de Vuetify
-
-// Crear Vuetify con componentes y directivas
-const vuetify = createVuetify({
-  components,
-  directives,
-});
-
-// Crear una única instancia de la aplicación y usar tanto router como vuetify
+const pinia = createPinia(); // Creación de pinia.
 const app = createApp(App);
 
-app.use(router); // Usar el router
-app.use(vuetify); // Usar Vuetify
+app.use(router);
+app.use(pinia); // Correcto, aquí ya usas el pinia creado.
+app.use(BootstrapVue3);
+app.use(vuetify);
 
-app.mount('#app'); // Montar la app en el div con id "app"
+app.mount('#app');

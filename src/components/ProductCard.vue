@@ -1,26 +1,26 @@
 <template>
-  <div class="product-card">
-    <img :src="product.image" alt="Product image" />
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.price }} USD</p>
-    <router-link :to="`/product/${product.id}`" class="btn btn-primary btn-lg mt-3 details-link">Ver detalles</router-link>
-    <button @click="addToCart" class="btn btn-primary btn-lg mt-3">Add to Cart</button>
-  </div>
+  <b-card :title="product.name" img-src="product.image" img-alt="product.name" img-top>
+    <b-card-text>
+      {{ product.description }}
+    </b-card-text>
+    <b-button @click="viewDetails">View Details</b-button>
+  </b-card>
 </template>
 
-<script>
-export default {
-  props: {
-    product: Object
-  },
-  methods: {
-    addToCart() {
-      this.$emit('add-to-cart', this.product);
-    }
-  }
+<script setup>
+import { useRouter } from 'vue-router';
+
+const props = defineProps({
+  product: Object,
+});
+
+const router = useRouter();
+
+const viewDetails = () => {
+  router.push({ name: 'ProductDetails', params: { id: props.product.id } });
 };
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+/* Tus estilos aquí */
 </style>
