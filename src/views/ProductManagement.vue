@@ -12,6 +12,7 @@
   </template>
   
   <script setup>
+  import { getData } from '../services/api';
   import { ref, onMounted } from 'vue';
   import axios from 'axios';
   import { useRouter } from 'vue-router';

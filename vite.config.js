@@ -6,7 +6,17 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Alias para '@' apuntando a 'src'
-    },
+      '@': path.resolve(__dirname, './src')
+    }
   },
+  server: {
+    port: 8000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8001', // URL de tu backend
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 });

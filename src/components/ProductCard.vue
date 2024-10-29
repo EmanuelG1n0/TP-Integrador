@@ -19,6 +19,7 @@ const router = useRouter();
 const viewDetails = () => {
   router.push({ name: 'ProductDetails', params: { id: props.product.id } });
 };
+
 </script>
 
 <style scoped>

@@ -17,3 +17,5 @@ app.use(BootstrapVue3);
 app.use(vuetify);
 
 app.mount('#app');
+
+

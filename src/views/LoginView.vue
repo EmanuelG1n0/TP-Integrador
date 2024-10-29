@@ -17,6 +17,7 @@
 import { ref } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
+import axios from '@/plugins/axios';
 
 const email = ref('');
 const password = ref('');
@@ -25,11 +26,16 @@ const router = useRouter();
 
 const submitLogin = async () => {
   try {
-    await authStore.login({ email: email.value, password: password.value });
+    const response = await axios.post('/login', {
+      email: email.value,
+      password: password.value
+    });
+    authStore.setUser(response.data.user);
+    authStore.setToken(response.data.token);
     alert('Inicio de sesión exitoso.');
     router.push('/');
   } catch (error) {
-    console.error(error);
+    console.error('Error al iniciar sesión:', error);
     alert('Error al iniciar sesión.');
   }
 };
