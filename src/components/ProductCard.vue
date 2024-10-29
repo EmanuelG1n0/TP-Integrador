@@ -1,26 +1,21 @@
 <template>
-  <div class="product-card">
-    <img :src="product.image" alt="Product image" />
-    <h2>{{ product.title }}</h2>
-    <p>{{ product.price }} USD</p>
-    <router-link :to="`/product/${product.id}`" class="btn btn-primary btn-lg mt-3 details-link">Ver detalles</router-link>
-    <button @click="addToCart" class="btn btn-primary btn-lg mt-3">Add to Cart</button>
-  </div>
+  <b-card>
+    <h5>{{ name }}</h5>
+    <p><strong>{{ description }}</strong></p>
+    <p><strong>Marca:</strong> {{ brand }}</p>
+    <p><strong>Precio:</strong> ${{ price }}</p>
+  </b-card>
 </template>
 
-<script>
-export default {
-  props: {
-    product: Object
-  },
-  methods: {
-    addToCart() {
-      this.$emit('add-to-cart', this.product);
-    }
-  }
-};
+<script setup>
+const props = defineProps({
+  name: String,
+  description: String,
+  price: Number,
+  brand: String
+});
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+/* Tus estilos aquí */
 </style>

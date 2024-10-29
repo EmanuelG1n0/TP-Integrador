@@ -1,36 +1,27 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
-import LoginView from '../views/LoginView.vue';
-import CatalogView from '../views/CatalogView.vue';
-import CartView from '../views/CartView.vue';
-import RegisterView from '../views/RegisterView.vue';
-import AboutView from '../views/AboutView.vue';
-import SupportView from '../views/SupportView.vue';
+import HomeView from '@/views/HomeView.vue';
+import CatalogView from '@/views/CatalogView.vue';
+import ProductDetailsView from '@/views/ProductDetailsView.vue';
+import CartView from '@/views/CartView.vue';
+import LoginView from '@/views/LoginView.vue';
+import RegisterView from '@/views/RegisterView.vue';
+import OrderDetailsView from '@/views/OrderDetailsView.vue';
+import ProductFormView from '@/views/ProductFormView.vue';
+
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
-  { path: '/register', name: 'Register', component: RegisterView, meta: { requiresAuth: true } },
-  { path: '/login', name: 'Login', component: LoginView, meta: { requiresAuth: true } },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
+  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView },
   { path: '/cart', name: 'Cart', component: CartView },
-  { path: '/about', name: 'About', component: AboutView },
-  { path: '/support', name: 'Support', component: SupportView},
+  { path: '/login', name: 'Login', component: LoginView },
+  { path: '/register', name: 'Register', component: RegisterView },
+  { path: '/orders/:id', name: 'OrderDetails', component: OrderDetailsView },
+  { path: '/admin/products/:id', name: 'ProductForm', component: ProductFormView },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-});
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!localStorage.getItem('user')) {
-      next({ name: 'Login' });
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
+  routes,
 });
 
 export default router;
