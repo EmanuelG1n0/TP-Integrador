@@ -7,7 +7,7 @@
   </template>
   
   <script>
-  import { getData } from '../services/api';
+  import { getProducts } from '../services/ProductService'; // Importa la función que obtiene los datos de la API
   
   export default {
     name: 'MiComponente',
@@ -17,7 +17,7 @@
       };
     },
     async created() {
-        console.log('Datos obtenidos:', this.data);// Llama a la API cuando el componente se haya creado
+        console.log('Productos Obtenidos:', this.data);// Llama a la API cuando el componente se haya creado
       this.data = await getData();
     },
   };

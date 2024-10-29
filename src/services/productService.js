@@ -1,4 +1,4 @@
-export async function getData() {
+export async function getProducts() {
     try {
       const response = await fetch('http://localhost:8001/app/products');
       if (!response.ok) {

@@ -1,25 +1,19 @@
 <template>
-  <b-card :title="product.name" img-src="product.image" img-alt="product.name" img-top>
-    <b-card-text>
-      {{ product.description }}
-    </b-card-text>
-    <b-button @click="viewDetails">View Details</b-button>
+  <b-card>
+    <h5>{{ name }}</h5>
+    <p><strong>{{ description }}</strong></p>
+    <p><strong>Marca:</strong> {{ brand }}</p>
+    <p><strong>Precio:</strong> ${{ price }}</p>
   </b-card>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
-
 const props = defineProps({
-  product: Object,
+  name: String,
+  description: String,
+  price: Number,
+  brand: String
 });
-
-const router = useRouter();
-
-const viewDetails = () => {
-  router.push({ name: 'ProductDetails', params: { id: props.product.id } });
-};
-
 </script>
 
 <style scoped>
