@@ -7,6 +7,7 @@ import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import OrderDetailsView from '@/views/OrderDetailsView.vue';
 import ProductFormView from '@/views/ProductFormView.vue';
+import AboutView  from '@/views/AboutView.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
@@ -17,6 +18,8 @@ const routes = [
   { path: '/register', name: 'Register', component: RegisterView },
   { path: '/orders/:id', name: 'OrderDetails', component: OrderDetailsView },
   { path: '/admin/products/:id', name: 'ProductForm', component: ProductFormView },
+  { path: '/about', name: 'About', component: AboutView },
+
 ];
 
 const router = createRouter({

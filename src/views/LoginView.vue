@@ -1,14 +1,26 @@
 <template>
-  <div>
-    <h2>Iniciar Sesión</h2>
-    <b-form @submit.prevent="submitLogin">
-      <b-form-group label="Email">
-        <b-form-input v-model="email" type="email" required></b-form-input>
+  <div class="login-container d-flex flex-column align-items-center justify-content-center p-4 border border-light rounded shadow" style="background-color: #f8f9fa;">
+    <h2 class="mb-4">Iniciar Sesión</h2>
+    <b-form @submit.prevent="submitLogin" class="w-100">
+      <b-form-group label="Email" label-for="email-input">
+        <b-form-input
+          id="email-input"
+          v-model="email"
+          type="email"
+          required
+          placeholder="Introduce tu correo electrónico"
+        ></b-form-input>
       </b-form-group>
-      <b-form-group label="Contraseña">
-        <b-form-input v-model="password" type="password" required></b-form-input>
+      <b-form-group label="Contraseña" label-for="password-input">
+        <b-form-input
+          id="password-input"
+          v-model="password"
+          type="password"
+          required
+          placeholder="Introduce tu contraseña"
+        ></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Ingresar</b-button>
+      <b-button type="submit" variant="primary" class="mt-3 w-100">Ingresar</b-button>
     </b-form>
   </div>
 </template>
@@ -42,5 +54,25 @@ const submitLogin = async () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+.login-container {
+  max-width: 400px; /* Ajusta el ancho máximo para mejor apariencia */
+  margin: 50px auto; /* Espacio superior */
+}
+
+h2 {
+  color: #333; /* Color de encabezado */
+}
+
+b-form-input {
+  transition: border-color 0.3s;
+}
+
+b-form-input:focus {
+  border-color: #007bff; /* Color del borde al enfocar */
+  outline: none; /* Quitar el contorno */
+}
+
+b-button {
+  font-size: 1em; /* Tamaño de fuente */
+}
 </style>
