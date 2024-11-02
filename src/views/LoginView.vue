@@ -32,8 +32,8 @@ const submitLogin = async () => {
       pass: pass.value
     });
     const token = response.data.token;
-    localStorage.setItem('authToken', token);
-    authStore.login(response.data);
+    localStorage.setItem('authToken', token); // Guardar el token en el almacenamiento local
+    await authStore.login(token); // Llamar a la acción login con el token
     alert('Inicio de sesión exitoso');
     router.push('/home');
   } catch (error) {
