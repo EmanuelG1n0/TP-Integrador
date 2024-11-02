@@ -25,7 +25,7 @@ const cartItems = ref([]);
 
 const getCartItems = async () => {
   try {
-    const response = await axios.get(`http://localhost:8001/api/carts/${authStore.userId}`);
+    const response = await axios.get(`http://localhost:8001/app/carts/${authStore.userId}`);
     cartItems.value = response.data.message; // Accede a message en lugar de data directamente
   } catch (error) {
     console.error('Error al obtener los ítems del carrito:', error);

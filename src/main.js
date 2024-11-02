@@ -2,11 +2,13 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import { BootstrapVue3 } from 'bootstrap-vue-3';
+import { createPinia } from 'pinia';
+import vuetify from './plugins/Vuetify';
+import 'vuetify/styles';
+import '@/assets/style.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
-import vuetify from './plugins/vuetify';
-import '@/assets/style.css';
-import { createPinia } from 'pinia'; // Correcto, aquí lo estás creando.
+
 
 const pinia = createPinia(); // Creación de pinia.
 const app = createApp(App);

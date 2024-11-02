@@ -81,7 +81,7 @@ export default {
   methods: {
     handleRegister() {
       // Lógica para enviar el formulario de registro
-      axios.post('http://localhost:8001/api/users', {
+      axios.post('http://localhost:8001/app/users', {
         name: this.name,
         lastname: this.lastname,
         mail: this.mail,
@@ -105,7 +105,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .register-container {
   padding: 20px;
 }

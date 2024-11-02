@@ -1,6 +1,6 @@
 <template>
   <b-card>
-    <h5>{{ product.name }}</h5>
+    <h5>{{ Item.ProductName }}</h5>
   </b-card>
 </template>
 
