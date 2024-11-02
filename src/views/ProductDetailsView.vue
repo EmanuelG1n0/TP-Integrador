@@ -10,7 +10,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useCartStore } from '@/store/cart';
 import axios from 'axios';
 
 const route = useRoute();
