@@ -10,21 +10,49 @@
             v-model="name"
             required
           ></v-text-field>
-
+          <v-text-field
+            label="Apellido"
+            v-model="lastname"
+            required
+          ></v-text-field>
           <v-text-field
             label="Correo electrónico"
-            v-model="email"
+            v-model="mail"
             required
             type="email"
           ></v-text-field>
-
+          <v-text-field
+            label="DNI"
+            v-model="dni"
+            required
+          ></v-text-field>
           <v-text-field
             label="Contraseña"
-            v-model="password"
+            v-model="pass"
             required
             type="password"
           ></v-text-field>
-
+          <v-text-field
+            label="Fecha de Nacimiento"
+            v-model="dateOfBirth"
+            required
+            type="date"
+          ></v-text-field>
+          <v-text-field
+            label="Dirección"
+            v-model="address"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="Ciudad"
+            v-model="city"
+            required
+          ></v-text-field>
+          <v-text-field
+            label="Estado"
+            v-model="state"
+            required
+          ></v-text-field>
           <v-btn color="primary" type="submit" class="mt-3" block>
             Crear
           </v-btn>
@@ -36,22 +64,33 @@
 
 <script>
 import axios from '@/plugins/axios';
-
 export default {
   data() {
     return {
       name: '',
-      email: '',
-      password: ''
+      lastname: '',
+      mail: '',
+      dni: '',
+      pass: '',
+      dateOfBirth: '',
+      address: '',
+      city: '',
+      state: ''
     };
   },
   methods: {
     handleRegister() {
       // Lógica para enviar el formulario de registro
-      axios.post('/register', {
+      axios.post('http://localhost:8001/api/users', {
         name: this.name,
-        email: this.email,
-        password: this.password
+        lastname: this.lastname,
+        mail: this.mail,
+        dni: this.dni,
+        pass: this.pass,
+        dateOfBirth: this.dateOfBirth,
+        address: this.address,
+        city: this.city,
+        state: this.state
       })
       .then(response => {
         console.log('Registrando:', response.data);
@@ -66,6 +105,8 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Tus estilos aquí */
+<style>
+.register-container {
+  padding: 20px;
+}
 </style>

@@ -1,7 +1,7 @@
 // src/plugins/vuetify.js
 import { createVuetify } from 'vuetify';
-import 'vuetify/styles'; // Import Vuetify styles
-import { aliases, mdi } from 'vuetify/iconsets/mdi'; // Import Material Design Icons
+import 'vuetify/styles';
+import { aliases, mdi } from 'vuetify/iconsets/mdi';
 
 const vuetify = createVuetify({
   icons: {

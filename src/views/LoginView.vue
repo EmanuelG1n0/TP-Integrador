@@ -17,11 +17,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 import axios from 'axios';
 
 const mail = ref('');
 const pass = ref('');
 const router = useRouter();
+const authStore = useAuthStore();
 
 const submitLogin = async () => {
   try {
@@ -29,11 +31,11 @@ const submitLogin = async () => {
       mail: mail.value,
       pass: pass.value
     });
-    const { token } = response.data;
-    if (token) {
-      localStorage.setItem('authToken', token);
-      router.push('/home');
-    }
+    const token = response.data.token;
+    localStorage.setItem('authToken', token);
+    authStore.login(response.data);
+    alert('Inicio de sesión exitoso');
+    router.push('/home');
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
     alert('Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.');

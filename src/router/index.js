@@ -16,8 +16,9 @@ const routes = [
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
   { path: '/orders/:id', name: 'OrderDetails', component: OrderDetailsView },
-  { path: '/admin/products/:id', name: 'ProductForm', component: ProductFormView },
+  { path: '/product-form', name: 'ProductForm', component: ProductFormView },
 ];
+
 
 const router = createRouter({
   history: createWebHistory(),
