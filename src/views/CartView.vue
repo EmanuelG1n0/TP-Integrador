@@ -7,6 +7,7 @@
           <CartItem :product="item.Product" :quantity="item.quantity" />
         </b-col>
       </b-row>
+      <b-button @click="generateOrder" variant="primary">Realizar Orden</b-button>
     </div>
     <div v-else>
       <p>Tu carrito está vacío.</p>
@@ -32,6 +33,18 @@ const getCartItems = async () => {
     console.error('Error al obtener los ítems del carrito:', error);
   }
 };
+
+const generateOrder = async () => {
+  try {
+    const response = await axios.post(`http://localhost:8001/app/carts/${userId}/generate-order`);
+    alert('Orden generada con éxito');
+    // Puedes agregar lógica adicional aquí, como redirigir al usuario o actualizar el estado del carrito
+  } catch (error) {
+    console.error('Error al generar la orden:', error);
+    alert('Error al generar la orden.');
+  }
+};
+
 
 onMounted(async () => {
   await getCartItems();
