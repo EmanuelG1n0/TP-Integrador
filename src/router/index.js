@@ -7,12 +7,14 @@ import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import OrderDetailsView from '@/views/OrderDetailsView.vue';
 import ProductFormView from '@/views/ProductFormView.vue';
+import ProfileView from '../views/ProfileView.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
   { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView },
   { path: '/cart', name: 'Cart', component: CartView },
+  { path: '/profile', name:  'Profile ', component: ProfileView },
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
   { path: '/orders/:id', name: 'OrderDetails', component: OrderDetailsView },
