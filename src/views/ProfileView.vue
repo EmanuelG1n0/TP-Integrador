@@ -9,7 +9,7 @@
         <b-form-input v-model="user.lastname" required></b-form-input>
       </b-form-group>
       <b-form-group label="Email">
-        <b-form-input v-model="user.mail" type="email" required disabled></b-form-input>
+        <b-form-input v-model="user.mail" type="email" required></b-form-input>
       </b-form-group>
       <b-form-group label="DNI">
         <b-form-input v-model="user.dni" required></b-form-input>
@@ -33,14 +33,25 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
 import axios from 'axios';
 
 const authStore = useAuthStore();
+const router = useRouter();
 const user = ref({});
 
 onMounted(() => {
-  user.value = { ...authStore.user };
+  if (!authStore.isAuthenticated) {
+    router.push('/login');
+  } else {
+    const userData = { ...authStore.user };
+    // aca tomacamos la fecha de nacimiento y la convertimos a un formato que el input de tipo date pueda entender
+    if (userData.dateOfBirth) {
+      userData.dateOfBirth = new Date(userData.dateOfBirth).toISOString().split('T')[0];
+    }
+    user.value = userData;
+  }
 });
 
 const updateProfile = async () => {
@@ -55,7 +66,7 @@ const updateProfile = async () => {
       address: user.value.address,
       city: user.value.city,
       state: user.value.state,
-      RoleId: 2,
+      RoleId: user.value.RoleId
     };
 
     const response = await axios.put(`http://localhost:8001/app/users/${user.value.id}`, payload);
