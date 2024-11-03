@@ -1,18 +1,40 @@
 <template>
-  <div>
-    <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
-    <b-form @submit.prevent="submitForm">
-      <b-form-group label="Nombre">
-        <b-form-input v-model="product.name" required></b-form-input>
+  <div class="container mt-5">
+    <h2 class="text-center">{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
+    <b-form @submit.prevent="submitForm" class="p-4 border rounded shadow bg-light">
+      <b-form-group label="Nombre" label-for="product-name">
+        <b-form-input
+          id="product-name"
+          v-model="product.name"
+          required
+          placeholder="Introduce el nombre del producto"
+        ></b-form-input>
       </b-form-group>
-      <b-form-group label="Descripción">
-        <b-form-textarea v-model="product.description" required></b-form-textarea>
+      
+      <b-form-group label="Descripción" label-for="product-description">
+        <b-form-textarea
+          id="product-description"
+          v-model="product.description"
+          required
+          placeholder="Introduce una descripción del producto"
+        ></b-form-textarea>
       </b-form-group>
-      <b-form-group label="Precio">
-        <b-form-input type="number" v-model="product.price" required></b-form-input>
+      
+      <b-form-group label="Precio" label-for="product-price">
+        <b-form-input
+          id="product-price"
+          type="number"
+          v-model="product.price"
+          required
+          placeholder="Introduce el precio del producto"
+        ></b-form-input>
       </b-form-group>
+
       <!-- Otros campos si es necesario -->
-      <b-button type="submit" variant="primary">{{ isEditing ? 'Actualizar' : 'Agregar' }}</b-button>
+      
+      <b-button type="submit" variant="primary" class="w-100">
+        {{ isEditing ? 'Actualizar' : 'Agregar' }}
+      </b-button>
     </b-form>
   </div>
 </template>
@@ -62,5 +84,8 @@ const submitForm = async () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+
+.container {
+  max-width: 600px;
+}
 </style>

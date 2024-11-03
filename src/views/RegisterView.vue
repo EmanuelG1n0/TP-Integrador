@@ -1,36 +1,52 @@
 <template>
-  <div class="register-container">
-    <v-card class="mx-auto" max-width="500">
-      <v-card-title class="text-center">Crear Cuenta</v-card-title>
-      <v-card-text>
-        <!-- Formulario de registro -->
-        <form @submit.prevent="handleRegister">
-          <v-text-field
-            label="Nombre"
-            v-model="name"
-            required
-          ></v-text-field>
+  <div class="container d-flex justify-content-center align-items-center " >
+    <div class="register-container">
+      <div class="card shadow" >
+        <div class="card-header text-center">
+          <h4>Crear Cuenta</h4>
+        </div>
+        <div class="card-body">
+          <form @submit.prevent="handleRegister">
+            <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+              <input
+                id="name"
+                type="text"
+                class="form-control"
+                v-model="name"
+                required
+              />
+            </div>
 
-          <v-text-field
-            label="Correo electrónico"
-            v-model="email"
-            required
-            type="email"
-          ></v-text-field>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                v-model="email"
+                required
+              />
+            </div>
 
-          <v-text-field
-            label="Contraseña"
-            v-model="password"
-            required
-            type="password"
-          ></v-text-field>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                v-model="password"
+                required
+              />
+            </div>
 
-          <v-btn color="primary" type="submit" class="mt-3" block>
-            Crear
-          </v-btn>
-        </form>
-      </v-card-text>
-    </v-card>
+            <button type="submit" class="btn btn-primary w-100 mt-3">
+              Crear
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -47,7 +63,6 @@ export default {
   },
   methods: {
     handleRegister() {
-      // Lógica para enviar el formulario de registro
       axios.post('/register', {
         name: this.name,
         email: this.email,
@@ -67,5 +82,12 @@ export default {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+/* Estilos opcionales */
+.container {
+  max-width: 600px; 
+  width: 100%; 
+  min-height: 500px; 
+  margin: 50px auto;
+  padding: 20px;
+}
 </style>
