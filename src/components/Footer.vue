@@ -1,9 +1,9 @@
 <template>
-  <b-footer class="text-center">
+  <footer class="text-center">
     <div>
       <p>&copy; {{ new Date().getFullYear() }} E-Commerce App. Todos los derechos reservados.</p>
     </div>
-  </b-footer>
+  </footer>
 </template>
 
 <script setup>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped>
-b-footer {
+footer {
   background-color: #f8f9fa;
   padding: 1rem;
 }
