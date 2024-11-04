@@ -1,17 +1,11 @@
 <template>
-  <div id="app">
-    <!-- Header - siempre visible -->
+  <v-app>
     <NavBar />
-
-    <!-- Contenedor principal de la aplicación -->
-    <main>
-      <!-- Aquí se cargan las vistas según la navegación -->
-      <router-view></router-view>
-    </main>
-
-    <!-- Footer - siempre visible -->
+    <v-main>
+      <router-view />
+    </v-main>
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -26,6 +20,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

@@ -1,16 +1,17 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="primary">
-    <b-navbar-brand href="#">E-Commerce</b-navbar-brand>
-    <b-navbar-nav>
-      <b-nav-item to="/">Home</b-nav-item>
-      <b-nav-item to="/catalog">Catalog</b-nav-item>
-      <b-nav-item v-if="isAuthenticated" to="/cart">Cart</b-nav-item>
-      <b-nav-item v-if="isAuthenticated" to="/orders" >orders</b-nav-item>
-      <b-nav-item v-if="!isAuthenticated" to="/login">Login</b-nav-item>
-      <b-nav-item v-if="isAuthenticated" @click="logout">Logout</b-nav-item>
-      <b-nav-item v-if="isAuthenticated" to="/profile">Hola, {{ userName }}</b-nav-item>
-    </b-navbar-nav>
-  </b-navbar>
+  <v-app-bar app color="primary" dark>
+    <v-toolbar-title>E-Commerce</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text :to="'/'">Home</v-btn>
+    <v-btn text :to="'/catalog'">Catalogo</v-btn>
+    <v-btn text v-if="isAuthenticated" :to="'/cart'">Carrito</v-btn>
+    <v-btn text v-if="!isAuthenticated" :to="'/login'">Ingresar</v-btn>
+    <template v-else>
+      <v-btn text v-if="isAdmin" :to="'/admin'">Admin</v-btn>
+      <v-btn text @click="logout">Logout</v-btn>
+      <v-btn text to="'/profile'" >Hola, {{ userName }}</v-btn>
+    </template>
+  </v-app-bar>
 </template>
 
 <script setup>
@@ -20,9 +21,9 @@ import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const router = useRouter();
-
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 const userName = computed(() => authStore.userName);
+const isAdmin = computed(() => authStore.userRoleId === 1); // Verificar si el usuario es admin
 
 const logout = () => {
   authStore.logout();
@@ -31,5 +32,5 @@ const logout = () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+/* Estilos personalizados si es necesario */
 </style>

@@ -21,10 +21,5 @@ const props = defineProps({
 </script>
 
 <style scoped>
-.product-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
+
 </style>

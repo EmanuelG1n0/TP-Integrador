@@ -1,44 +1,46 @@
 <template>
   <div>
     <h2>Catálogo de Productos</h2>
-    <b-row>
-      <b-col cols="4" v-for="product in products" :key="product.id">
-        <ProductCard 
-        :product="product" 
-        @add-to-cart="addToCart" 
+    <v-row>
+      <v-col
+        cols="4"
+        v-for="product in products"
+        :key="product.id"
+      >
+        <ProductCard
+          :product="product"
+          @add-to-cart="addToCart"
         />
-      </b-col>
-    </b-row>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
 import ProductCard from '@/components/ProductCard.vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
-const router = useRouter();
-const userId = authStore.userId;
-let cartId = authStore.cartId; // Cambiado a let
+const userId = ref(authStore.userId); // Usamos ref para reactividad
+let cartId = ref(authStore.cartId);
+
 const products = ref([]);
 
 const addToCart = async (product) => {
-  if (!authStore.isAuthenticated) {
-    alert('Por favor, inicia sesión para agregar productos al carrito.');
-    router.push('/login');
+  if (!userId.value) {
+    alert('Usuario no autenticado. Por favor, inicia sesión.');
     return;
   }
 
   try {
-    const responseCart = await axios.get(`http://localhost:8001/app/carts/${userId}`);
-    cartId = responseCart.data.message.id;
+    const responseCart = await axios.get(`http://localhost:8001/app/carts/${userId.value}`);
+    cartId.value = responseCart.data.message.id;
     await axios.post('http://localhost:8001/app/carts/add', {
-      cartId: cartId,
+      cartId: cartId.value,
       productId: product.id,
-      quantity: 1 // Puedes ajustar la cantidad según sea necesario
+      quantity: 1,
     });
     alert('Producto agregado al carrito con éxito');
   } catch (error) {
@@ -50,7 +52,7 @@ const addToCart = async (product) => {
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8001/app/products/');
-    products.value = response.data.message; // Accede a message en lugar de data directamente
+    products.value = response.data.message;
   } catch (error) {
     console.error(error);
     alert('Error al obtener los productos.');

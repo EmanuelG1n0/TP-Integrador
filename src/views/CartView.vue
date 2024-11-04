@@ -2,12 +2,16 @@
   <div>
     <h1>Carrito de Compras</h1>
     <div v-if="cartItems.length">
-      <b-row>
-        <b-col cols="4" v-for="item in cartItems" :key="item.id">
+      <v-row>
+        <v-col
+          cols="4"
+          v-for="item in cartItems"
+          :key="item.id"
+        >
           <CartItem :product="item.Product" :quantity="item.quantity" />
-        </b-col>
-      </b-row>
-      <b-button @click="generateOrder" variant="primary">Realizar Orden</b-button>
+        </v-col>
+      </v-row>
+      <v-btn color="primary" @click="generateOrder">Realizar Orden</v-btn>
     </div>
     <div v-else>
       <p>Tu carrito está vacío.</p>
@@ -22,7 +26,7 @@ import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
-const userId = authStore.userId; 
+const userId = authStore.userId;
 const cartItems = ref([]);
 
 const getCartItems = async () => {
@@ -44,7 +48,6 @@ const generateOrder = async () => {
     alert('Error al generar la orden.');
   }
 };
-
 
 onMounted(async () => {
   await getCartItems();
