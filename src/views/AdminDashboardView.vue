@@ -172,8 +172,8 @@ const fetchProducts = async () => {
 
 const fetchUsers = async () => {
   try {
-    const usuarios = await axios.get('http://localhost:8001/app/users/');
-    users.value = usuarios.data;
+    const response = await axios.get('http://localhost:8001/app/users/');
+    users.value = response.data.message;
   } catch (error) {
     console.error('Error al obtener los usuarios:', error);
     alert('Error al obtener los usuarios.');
