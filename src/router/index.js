@@ -5,7 +5,7 @@ import ProductDetailsView from '@/views/ProductDetailsView.vue';
 import CartView from '@/views/CartView.vue';
 import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
-import OrderDetailsView from '@/views/OrderDetailsView.vue';
+import OrdersView from '@/views/OrdersView.vue';
 import ProductFormView from '@/views/ProductFormView.vue';
 import ProfileView from '../views/ProfileView.vue';
 
@@ -17,7 +17,7 @@ const routes = [
   { path: '/profile', name:  'Profile ', component: ProfileView },
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
-  { path: '/orders/:id', name: 'OrderDetails', component: OrderDetailsView },
+  { path: '/orders', name: 'OrdersView', component: OrdersView },
   { path: '/product-form', name: 'ProductForm', component: ProductFormView },
 ];
 

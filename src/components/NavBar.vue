@@ -5,6 +5,7 @@
       <b-nav-item to="/">Home</b-nav-item>
       <b-nav-item to="/catalog">Catalog</b-nav-item>
       <b-nav-item to="/cart">Cart</b-nav-item>
+      <b-nav-item v-if="isAuthenticated" to="/orders" >orders</b-nav-item>
       <b-nav-item v-if="!isAuthenticated" to="/login">Login</b-nav-item>
       <b-nav-item v-if="isAuthenticated" @click="logout">Logout</b-nav-item>
       <b-nav-item v-if="isAuthenticated" to="/profile">Hola, {{ userName }}</b-nav-item>
