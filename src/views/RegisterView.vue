@@ -83,7 +83,7 @@ export default {
   methods: {
     async handleRegister() {
       try {
-        const response = await axios.post('http://localhost:8001/app/users', {
+        const response = await axios.post('http://localhost:8001/app/users/', {
           name: this.name,
           lastname: this.lastname,
           mail: this.mail,

@@ -22,15 +22,18 @@ const users = ref([]);
 const headers = [
   { text: 'ID', value: 'id' },
   { text: 'Nombre', value: 'name' },
-  { text: 'Email', value: 'email' },
-  { text: 'Rol', value: 'role' },
+  { text: 'Rol', value: 'role.name' },
   { text: 'Acciones', value: 'actions', sortable: false },
 ];
 
 const fetchUsers = async () => {
   try {
-    const response = await axios.get('/api/users');
-    users.value = response.data;
+    const response = await axios.get('http://localhost:8001/app/users/');
+    if (response.data.success) {
+      users.value = response.data.message;
+    } else {
+      alert('Error al obtener los usuarios.');
+    }
   } catch (error) {
     console.error('Error fetching users:', error);
     alert('Error al obtener los usuarios.');
@@ -44,7 +47,7 @@ const editUser = (userId) => {
 const deleteUserHandler = async (userId) => {
   if (confirm('¿Estás seguro de eliminar este usuario?')) {
     try {
-      await axios.delete(`/api/users/${userId}`);
+      await axios.delete(`http://localhost:8001/app/users/${userId}`);
       users.value = users.value.filter(u => u.id !== userId);
       alert('Usuario eliminado con éxito.');
     } catch (error) {

@@ -30,12 +30,10 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Panel de Administración</v-toolbar-title>
     </v-app-bar>
-
     <v-main>
       <v-container>
         <h2>Gestión de Productos</h2>
@@ -53,56 +51,6 @@
             <v-btn small color="red" @click="deleteProductHandler(item.id)">Eliminar</v-btn>
           </template>
         </v-data-table>
-
-        <v-dialog v-model="editProductDialog" max-width="600px">
-          <v-card>
-            <v-card-title>
-              <span class="headline">Editar Producto</span>
-            </v-card-title>
-            <v-card-text>
-              <v-form @submit.prevent="submitEditProductForm">
-                <v-text-field
-                  label="Nombre"
-                  v-model="selectedProduct.name"
-                  required
-                ></v-text-field>
-                <v-textarea
-                  label="Descripción"
-                  v-model="selectedProduct.description"
-                  required
-                ></v-textarea>
-                <v-text-field
-                  label="Precio"
-                  type="number"
-                  v-model="selectedProduct.price"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  label="Stock"
-                  type="number"
-                  v-model="selectedProduct.stock"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  label="Categoría"
-                  v-model="selectedProduct.category"
-                  required
-                ></v-text-field>
-                <v-text-field
-                  label="URL de la Imagen"
-                  v-model="selectedProduct.imageUrl"
-                  required
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="editProductDialog = false">Cancelar</v-btn>
-              <v-btn color="blue darken-1" text @click="submitEditProductForm">Guardar</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-
         <h3>Gestión de Usuarios</h3>
         <v-btn color="primary" @click="goToAddUser">Agregar Usuario</v-btn>
         <v-data-table
@@ -123,10 +71,11 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 import axios from 'axios';
 
 const router = useRouter();
-
+const authStore = useAuthStore();
 const drawer = ref(true);
 const products = ref([]);
 const users = ref([]);
@@ -139,7 +88,6 @@ const selectedProduct = ref({
   category: '',
   imageUrl: '',
 });
-
 const productHeaders = [
   { text: 'ID', value: 'id' },
   { text: 'Nombre', value: 'name' },
@@ -151,7 +99,6 @@ const productHeaders = [
   { text: 'Imagen', value: 'imageUrl' }, // Añadir el campo de imagen
   { text: 'Acciones', value: 'actions', sortable: false },
 ];
-
 const userHeaders = [
   { text: 'ID', value: 'id' },
   { text: 'Nombre', value: 'name' },
@@ -172,10 +119,10 @@ const fetchProducts = async () => {
 
 const fetchUsers = async () => {
   try {
-    const usuarios = await axios.get('http://localhost:8001/app/users/');
-    users.value = usuarios.data;
+    const response = await axios.get('http://localhost:8001/app/users/');
+    users.value = response.data.message;
   } catch (error) {
-    console.error('Error al obtener los usuarios:', error);
+    console.error('Error fetching users:', error);
     alert('Error al obtener los usuarios.');
   }
 };
@@ -220,14 +167,6 @@ const deleteProductHandler = async (productId) => {
   }
 };
 
-const goToAddUser = () => {
-  router.push({ name: 'Register' });
-};
-
-const editUser = (userId) => {
-  router.push({ name: 'UserForm', params: { id: userId } });
-};
-
 const deleteUserHandler = async (userId) => {
   if (confirm('¿Estás seguro de eliminar este usuario?')) {
     try {
@@ -242,6 +181,12 @@ const deleteUserHandler = async (userId) => {
 };
 
 onMounted(async () => {
+  console.log('UserRoleId:', authStore.userRoleId); // Verifica que el userRoleId se esté imprimiendo correctamente
+  if (authStore.userRoleId !== 1) {
+    alert('No tienes permisos para acceder al panel de administración.');
+    router.push('/'); // Redirigir a la página de inicio si el usuario no tiene roleId 1
+    return;
+  }
   await fetchProducts();
   await fetchUsers();
 });
