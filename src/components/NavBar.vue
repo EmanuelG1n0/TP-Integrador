@@ -1,15 +1,18 @@
 <template>
-  <b-navbar toggleable="lg" type="dark" variant="primary">
-    <b-navbar-brand href="#">E-Commerce</b-navbar-brand>
-    <b-navbar-nav>
-      <b-nav-item to="/">Home</b-nav-item>
-      <b-nav-item to="/catalog">Catalog</b-nav-item>
-      <b-nav-item to="/cart">Cart</b-nav-item>
-      <b-nav-item v-if="!isAuthenticated" to="/login">Login</b-nav-item>
-      <b-nav-item v-if="isAuthenticated" @click="logout">Logout</b-nav-item>
-      <b-nav-item v-if="isAuthenticated">Hola, {{ userName }}</b-nav-item>
-    </b-navbar-nav>
-  </b-navbar>
+  <v-app-bar app color="primary" dark>
+    <v-toolbar-title>E-Commerce</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text :to="'/'">Home</v-btn>
+    <v-btn text :to="'/catalog'">Catalogo</v-btn>
+    <v-btn text :to="'/cart'">Carrito</v-btn>
+    <template v-if="!isAuthenticated">
+      <v-btn text :to="'/login'">Ingresar</v-btn>
+    </template>
+    <template v-else>
+      <v-btn text @click="logout">Logout</v-btn>
+      <v-btn text disabled>Hola, {{ userName }}</v-btn>
+    </template>
+  </v-app-bar>
 </template>
 
 <script setup>
@@ -30,5 +33,5 @@ const logout = () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+/* Estilos personalizados si es necesario */
 </style>

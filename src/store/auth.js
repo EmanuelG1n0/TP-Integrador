@@ -8,16 +8,21 @@ export const useAuthStore = defineStore('auth', {
   }),
   actions: {
     async login(token) {
-      // Guardar el token en el estado
-      this.token = token;
+      try {
+        // Guardar el token en el estado
+        this.token = token;
 
-      // Establecer el header de autorización para futuras solicitudes
-      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
+        // Establecer el header de autorización para futuras solicitudes
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
 
-      // Obtener la información del usuario usando el token
-      const response = await axios.get('http://localhost:8001/app/users/loginToken');
-      this.user = response.data.user;
-      console.log('User:', this.user); // Verifica que el usuario se esté guardando correctamente
+        // Obtener la información del usuario usando el token
+        const response = await axios.get('http://localhost:8001/app/users/loginToken');
+        this.user = response.data.user;
+        console.log('User:', this.user); // Verifica que el usuario se esté guardando correctamente
+      } catch (error) {
+        console.error('Error during login:', error);
+        throw new Error('Error during login');
+      }
     },
     logout() {
       this.user = null;
@@ -33,7 +38,7 @@ export const useAuthStore = defineStore('auth', {
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
-    userName: (state) => state.user ? state.user.name : '',
-    userId: (state) => state.user ? state.user.id : null,
+    userName: (state) => (state.user ? state.user.name : ''),
+    userId: (state) => (state.user ? state.user.id : null),
   },
 });

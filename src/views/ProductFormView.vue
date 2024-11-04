@@ -1,26 +1,48 @@
 <template>
   <div>
     <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Producto' }}</h2>
-    <b-form @submit.prevent="submitForm">
-      <b-form-group label="Nombre">
-        <b-form-input v-model="product.name" required></b-form-input>
-      </b-form-group>
-      <b-form-group label="Descripción">
-        <b-form-textarea v-model="product.description" required></b-form-textarea>
-      </b-form-group>
-      <b-form-group label="Precio">
-        <b-form-input type="number" v-model="product.price" required></b-form-input>
-      </b-form-group>
-      <!-- Otros campos si es necesario -->
-      <b-button type="submit" variant="primary">{{ isEditing ? 'Actualizar' : 'Agregar' }}</b-button>
-    </b-form>
+    <v-form @submit.prevent="submitForm">
+      <v-text-field
+        label="Nombre"
+        v-model="product.name"
+        required
+      ></v-text-field>
+      <v-textarea
+        label="Descripción"
+        v-model="product.description"
+        required
+      ></v-textarea>
+      <v-text-field
+        label="Precio"
+        type="number"
+        v-model="product.price"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="Stock"
+        type="number"
+        v-model="product.stock"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="Categoría"
+        v-model="product.category"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="URL de la Imagen"
+        v-model="product.imageUrl"
+        required
+      ></v-text-field>
+      <v-btn color="primary" type="submit">{{ isEditing ? 'Actualizar' : 'Agregar' }}</v-btn>
+    </v-form>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
+import { getProduct, createProduct, updateProduct } from '@/services/productService';
 
 const route = useRoute();
 const router = useRouter();
@@ -28,37 +50,37 @@ const product = ref({
   name: '',
   description: '',
   price: 0,
-  // Otros campos si es necesario
+  stock: 0,
+  category: '',
+  imageUrl: '', // Añadir campo de URL de la imagen
 });
 const isEditing = computed(() => route.params.id !== 'new');
-
-onMounted(async () => {
+const fetchProduct = async () => {
   if (isEditing.value) {
     try {
-      const response = await axios.get(`/api/products/${route.params.id}`);
-      product.value = response.data;
+      const response = await getProduct(route.params.id);
+      product.value = response; // Ajusta según la estructura de tu respuesta
     } catch (error) {
-      console.error(error);
-      alert('Error al obtener el producto.');
+      console.error('Error fetching product:', error);
     }
   }
-});
-
+};
 const submitForm = async () => {
   try {
     if (isEditing.value) {
-      await axios.put(`/api/products/${route.params.id}`, product.value);
+      await updateProduct(route.params.id, product.value);
       alert('Producto actualizado con éxito.');
     } else {
-      await axios.post('/api/products', product.value);
+      await createProduct(product.value);
       alert('Producto agregado con éxito.');
     }
-    router.push({ name: 'AdminDashboard' });
+    router.push({ name: 'ProductList' });
   } catch (error) {
-    console.error(error);
-    alert('Error al guardar el producto.');
+    console.error('Error saving product:', error);
+    alert('Error al guardar el producto. Por favor, intente nuevamente.');
   }
 };
+onMounted(fetchProduct);
 </script>
 
 <style scoped>

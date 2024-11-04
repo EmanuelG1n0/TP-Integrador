@@ -63,8 +63,10 @@
 </template>
 
 <script>
-import axios from '@/plugins/axios';
+import axios from 'axios';
+
 export default {
+  name: 'RegisterView',
   data() {
     return {
       name: '',
@@ -79,27 +81,26 @@ export default {
     };
   },
   methods: {
-    handleRegister() {
-      // Lógica para enviar el formulario de registro
-      axios.post('http://localhost:8001/app/users', {
-        name: this.name,
-        lastname: this.lastname,
-        mail: this.mail,
-        dni: this.dni,
-        pass: this.pass,
-        dateOfBirth: this.dateOfBirth,
-        address: this.address,
-        city: this.city,
-        state: this.state
-      })
-      .then(response => {
-        console.log('Registrando:', response.data);
-        // Redirigir o mostrar mensaje de éxito
-      })
-      .catch(error => {
+    async handleRegister() {
+      try {
+        const response = await axios.post('http://localhost:8001/app/users', {
+          name: this.name,
+          lastname: this.lastname,
+          mail: this.mail,
+          dni: this.dni,
+          pass: this.pass,
+          dateOfBirth: this.dateOfBirth,
+          address: this.address,
+          city: this.city,
+          state: this.state
+        });
+        console.log('Registrado:', response.data);
+        alert('Registro exitoso');
+        this.$router.push('/login'); // Redirige al login después del registro
+      } catch (error) {
         console.error('Error registrando:', error);
-        // Mostrar mensaje de error
-      });
+        alert('Error al registrar. Por favor, intente nuevamente.');
+      }
     }
   }
 };
