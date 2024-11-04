@@ -12,13 +12,13 @@ import ProfileView from '../views/ProfileView.vue';
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
-  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView },
   { path: '/cart', name: 'Cart', component: CartView },
+  { path: '/product-form', name: 'ProductForm', component: ProductFormView },
+  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView, props: true },
   { path: '/profile', name:  'Profile ', component: ProfileView },
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
   { path: '/orders', name: 'OrdersView', component: OrdersView },
-  { path: '/product-form', name: 'ProductForm', component: ProductFormView },
 ];
 
 
