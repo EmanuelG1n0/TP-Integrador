@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="product-card">
     <v-img :src="product.imageUrl" :alt="product.name" class="product-image"></v-img>
     <v-card-title>{{ product.name }}</v-card-title>
     <v-card-subtitle><strong>{{ product.description }}</strong></v-card-subtitle>
@@ -20,7 +20,6 @@ const props = defineProps({
     required: true
   }
 });
-
 const emit = defineEmits(['add-to-cart']);
 const handleAddToCart = () => {
   emit('add-to-cart', props.product);
@@ -28,5 +27,12 @@ const handleAddToCart = () => {
 </script>
 
 <style scoped>
-
+.product-card {
+  max-width: 100%;
+  margin: 10px;
+}
+.product-image {
+  max-width: 100%;
+  height: auto;
+}
 </style>

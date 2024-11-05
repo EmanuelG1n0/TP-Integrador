@@ -5,11 +5,12 @@
     <v-btn text :to="'/'">Home</v-btn>
     <v-btn text :to="'/catalog'">Catalogo</v-btn>
     <v-btn text v-if="isAuthenticated" :to="'/cart'">Carrito</v-btn>
+    <v-btn text v-if="isAuthenticated" :to="'/orders'">Órdenes</v-btn>
     <v-btn text v-if="!isAuthenticated" :to="'/login'">Ingresar</v-btn>
     <template v-else>
       <v-btn text v-if="isAdmin" :to="'/admin'">Admin</v-btn>
       <v-btn text @click="logout">Logout</v-btn>
-      <v-btn text to="'/profile'" >Hola, {{ userName }}</v-btn>
+      <v-btn text to="'/profile'">Hola, {{ userName }}</v-btn>
     </template>
   </v-app-bar>
 </template>
@@ -21,9 +22,10 @@ import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const router = useRouter();
+
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 const userName = computed(() => authStore.userName);
-const isAdmin = computed(() => authStore.userRoleId === 1); // Verificar si el usuario es admin
+const isAdmin = computed(() => authStore.userRoleId === 1);
 
 const logout = () => {
   authStore.logout();
@@ -32,5 +34,9 @@ const logout = () => {
 </script>
 
 <style scoped>
-/* Estilos personalizados si es necesario */
+.v-toolbar-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

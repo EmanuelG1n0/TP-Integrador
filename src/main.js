@@ -12,6 +12,9 @@ import { createVuetify } from 'vuetify';
 import { aliases, mdi } from 'vuetify/iconsets/mdi';
 import '@mdi/font/css/materialdesignicons.css'; // Asegúrate de tener instalado @mdi/font
 
+// Importa tus estilos personalizados después de Vuetify
+import '@/assets/style.css';
+
 // Configuración de Vuetify
 const vuetify = createVuetify({
   icons: {
@@ -35,9 +38,6 @@ const vuetify = createVuetify({
     },
   },
 });
-
-// Importa tus estilos personalizados después de Vuetify
-import '@/assets/style.css';
 
 const app = createApp(App);
 const pinia = createPinia();

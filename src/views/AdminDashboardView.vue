@@ -51,18 +51,6 @@
             <v-btn small color="red" @click="deleteProductHandler(item.id)">Eliminar</v-btn>
           </template>
         </v-data-table>
-        <h3>Gestión de Usuarios</h3>
-        <v-btn color="primary" @click="goToAddUser">Agregar Usuario</v-btn>
-        <v-data-table
-          :headers="userHeaders"
-          :items="users"
-          class="elevation-1"
-        >
-          <template #item.actions="{ item }">
-            <v-btn small @click="editUser(item.id)">Editar</v-btn>
-            <v-btn small color="red" @click="deleteUserHandler(item.id)">Eliminar</v-btn>
-          </template>
-        </v-data-table>
       </v-container>
     </v-main>
   </v-app>
@@ -96,7 +84,7 @@ const productHeaders = [
   { text: 'Marca', value: 'brand' },
   { text: 'Stock', value: 'stock' },
   { text: 'Categoría', value: 'category' },
-  { text: 'Imagen', value: 'imageUrl' }, // Añadir el campo de imagen
+  { text: 'Imagen', value: 'imageUrl' },
   { text: 'Acciones', value: 'actions', sortable: false },
 ];
 const userHeaders = [
@@ -110,7 +98,7 @@ const userHeaders = [
 const fetchProducts = async () => {
   try {
     const response = await axios.get('http://localhost:8001/app/products/');
-    products.value = response.data.message; // Ajusta según la estructura de tu respuesta
+    products.value = response.data.message;
   } catch (error) {
     console.error('Error al obtener los productos:', error);
     alert('Error al obtener los productos.');
@@ -122,7 +110,7 @@ const fetchUsers = async () => {
     const response = await axios.get('http://localhost:8001/app/users/');
     users.value = response.data.message;
   } catch (error) {
-    console.error('Error fetching users:', error);
+    console.error('Error al obtener los usuarios:', error);
     alert('Error al obtener los usuarios.');
   }
 };
@@ -147,7 +135,7 @@ const openEditProductDialog = (product) => {
 const submitEditProductForm = async () => {
   try {
     await axios.put(`http://localhost:8001/app/products/${selectedProduct.value.id}`, selectedProduct.value);
-    fetchProducts(); // Actualiza la lista de productos
+    fetchProducts();
     editProductDialog.value = false;
     alert('Producto actualizado con éxito.');
   } catch (error) {
@@ -160,7 +148,7 @@ const deleteProductHandler = async (productId) => {
   if (confirm('¿Estás seguro de eliminar este producto?')) {
     try {
       await axios.delete(`http://localhost:8001/app/products/${productId}`);
-      fetchProducts(); // Actualiza la lista de productos
+      fetchProducts();
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
     }
@@ -171,7 +159,7 @@ const deleteUserHandler = async (userId) => {
   if (confirm('¿Estás seguro de eliminar este usuario?')) {
     try {
       await axios.delete(`http://localhost:8001/app/users/${userId}`);
-      await fetchUsers(); // Actualiza la lista de usuarios
+      await fetchUsers();
       alert('Usuario eliminado con éxito.');
     } catch (error) {
       console.error('Error al eliminar el usuario:', error);
@@ -181,10 +169,10 @@ const deleteUserHandler = async (userId) => {
 };
 
 onMounted(async () => {
-  console.log('UserRoleId:', authStore.userRoleId); // Verifica que el userRoleId se esté imprimiendo correctamente
+  console.log('UserRoleId:', authStore.userRoleId);
   if (authStore.userRoleId !== 1) {
     alert('No tienes permisos para acceder al panel de administración.');
-    router.push('/'); // Redirigir a la página de inicio si el usuario no tiene roleId 1
+    router.push('/');
     return;
   }
   await fetchProducts();

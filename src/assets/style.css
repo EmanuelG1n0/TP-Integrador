@@ -26,7 +26,6 @@
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
-
 .v-btn:hover {
   background-color: hsl(340, 100%, 50%);
 }
@@ -45,7 +44,6 @@
   border-radius: 4px;
   padding: 8px;
 }
-
 .v-text-field input:focus {
   border-color: var(--v-primary-base);
   box-shadow: 0 0 5px rgba(236, 27, 90, 0.5);
@@ -60,7 +58,6 @@
   text-align: center;
   padding: 80px 20px;
 }
-
 .banner-content {
   max-width: 800px;
   margin: 0 auto;
@@ -74,7 +71,6 @@
   border-radius: 20px 0 0 20px;
   border: 1px solid #ddd;
 }
-
 form button {
   padding: 8px 12px;
   border-radius: 0 20px 20px 0;
@@ -89,7 +85,6 @@ form button {
     padding: 40px 15px;
   }
 }
-
 @media (max-width: 480px) {
   .banner {
     padding: 30px 10px;
@@ -117,13 +112,11 @@ form button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px;
 }
-
 .product-card img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
 }
-
 .product-card h2 {
   font-size: 1.2em;
   margin: 10px 0;
@@ -131,12 +124,10 @@ form button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .product-card p {
   font-size: 1em;
   margin: 5px 0;
 }
-
 .product-card button {
   background-color: #007bff;
   color: white;
@@ -147,12 +138,10 @@ form button {
   font-size: 1em;
   margin-top: 10px;
 }
-
 .product-card button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
 .product-card button:hover:not(:disabled) {
   background-color: #0056b3;
 }
@@ -166,12 +155,10 @@ form button {
   padding: 20px;
   border-radius: 8px;
 }
-
 .product-images {
   flex: 1;
   min-width: 300px;
 }
-
 .image-container {
   width: 100%;
   max-width: 500px;
@@ -181,31 +168,24 @@ form button {
   align-items: center;
   margin-bottom: 20px;
 }
-
 .image-container img {
   width: 100%;
   height: auto;
 }
-
 .product-info {
   flex: 1;
   min-width: 300px;
 }
-
 .product-title {
   font-size: 2rem;
   margin-bottom: 20px;
 }
-
 .product-description {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
-
 .product-price {
   font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 20px;
 }
 
 /* Estilos generales */
@@ -213,18 +193,15 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
-
 nav {
   margin-bottom: 20px;
 }
-
 nav a {
   margin-right: 15px;
   text-decoration: none;
   color: #007bff;
   font-weight: bold;
 }
-
 nav a:hover {
   color: #0056b3;
 }
@@ -236,7 +213,6 @@ nav a:hover {
   align-items: center;
   margin-top: 20px;
 }
-
 .pagination button {
   background-color: #007bff;
   color: white;
@@ -247,16 +223,13 @@ nav a:hover {
   font-size: 1em;
   margin: 0 10px;
 }
-
 .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
 .pagination button:hover:not(:disabled) {
   background-color: #0056b3;
 }
-
 .pagination span {
   font-size: 1em;
 }
