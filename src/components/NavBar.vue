@@ -5,6 +5,7 @@
     <v-btn text :to="'/'">Home</v-btn>
     <v-btn text :to="'/catalog'">Catalogo</v-btn>
     <v-btn text v-if="isAuthenticated" :to="'/cart'">Carrito</v-btn>
+    <v-btn text v-if="isAuthenticated" :to="'/orders'">Órdenes</v-btn> <!-- Cambiado de 'Carrito' a 'Órdenes' -->
     <v-btn text v-if="!isAuthenticated" :to="'/login'">Ingresar</v-btn>
     <template v-else>
       <v-btn text v-if="isAdmin" :to="'/admin'">Admin</v-btn>
