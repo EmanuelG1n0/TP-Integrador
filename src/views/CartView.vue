@@ -8,7 +8,7 @@
           v-for="item in cartItems"
           :key="item.id"
         >
-          <CartItem :product="item.Product" :quantity="item.quantity" />
+          <CartItem :product="item.Product" :quantity="item.quantity" :cartId="cartId" @remove-from-cart="removeFromCart" />
         </v-col>
       </v-row>
       <v-btn color="primary" @click="generateOrder">Realizar Orden</v-btn>
@@ -21,20 +21,36 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import CartItem from '@/components/CartItem.vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
+import CartItem from '@/components/CartItem.vue';
 
 const authStore = useAuthStore();
 const userId = authStore.userId;
 const cartItems = ref([]);
+const cartId = ref(null);
 
 const getCartItems = async () => {
   try {
     const response = await axios.get(`http://localhost:8001/app/carts/${userId}`);
-    cartItems.value = response.data.message.CartItems; // Accede a CartItems en lugar de message directamente
+    cartItems.value = response.data.message.CartItems;
+    cartId.value = response.data.message.id;
   } catch (error) {
     console.error('Error al obtener los ítems del carrito:', error);
+  }
+};
+
+const removeFromCart = async (productId) => {
+  try {
+    await axios.post('http://localhost:8001/app/carts/remove', {
+      cartId: cartId.value,
+      productId: productId
+    });
+    await getCartItems();
+    alert('Producto eliminado del carrito con éxito');
+  } catch (error) {
+    console.error('Error al eliminar el producto del carrito:', error);
+    alert('Error al eliminar el producto del carrito.');
   }
 };
 
@@ -42,7 +58,6 @@ const generateOrder = async () => {
   try {
     const response = await axios.post(`http://localhost:8001/app/carts/${userId}/generate-order`);
     alert('Orden generada con éxito');
-    // Puedes agregar lógica adicional aquí, como redirigir al usuario o actualizar el estado del carrito
   } catch (error) {
     console.error('Error al generar la orden:', error);
     alert('Error al generar la orden.');

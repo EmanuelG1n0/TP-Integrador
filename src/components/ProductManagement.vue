@@ -28,6 +28,7 @@
               <v-text-field v-model="editedProduct.price" label="Precio" type="number" required></v-text-field>
               <v-text-field v-model="editedProduct.stock" label="Stock" type="number" required></v-text-field>
               <v-text-field v-model="editedProduct.category" label="Categoría" required></v-text-field>
+              <v-text-field v-model="editedProduct.brand" label="Marca" required></v-text-field>
               <v-text-field v-model="editedProduct.imageUrl" label="URL de la Imagen" required></v-text-field>
             </v-form>
           </v-card-text>

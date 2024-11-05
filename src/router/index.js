@@ -8,16 +8,18 @@ import LoginView from '@/views/LoginView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import OrderDetailsView from '@/views/OrderDetailsView.vue';
 import AdminDashboardView from '@/views/AdminDashboardView.vue';
+import ProfileView from '../views/ProfileView.vue';
 import { useAuthStore } from '@/store/auth';
 
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
-  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView },
+  { path: '/profile', name: 'Profile', component: ProfileView },
+  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView, props: true},
   { path: '/cart', name: 'Cart', component: CartView },
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
-  { path: '/orders', name: 'OrderDetails', component: OrderDetailsView },
+  { path: '/orders', name: 'Orders', component: OrderDetailsView },
   { path: '/admin', name: 'AdminDashboard', component: AdminDashboardView, meta: { requiresAuth: true } },
 ];
 

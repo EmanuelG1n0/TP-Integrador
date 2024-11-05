@@ -18,27 +18,35 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import ProductCard from '@/components/ProductCard.vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
-const userId = ref(authStore.userId); // Usamos ref para reactividad
-let cartId = ref(authStore.cartId);
-
+const userId = authStore.userId;
+let cartId = authStore.cartId; // Cambiado a let para permitir la reasignación
 const products = ref([]);
+const router = useRouter();
+
+const getCartId = async () => {
+  if (!cartId) {
+    const responseCart = await axios.get(`http://localhost:8001/app/carts/${userId}`);
+    cartId = responseCart.data.message.id;
+  }
+};
 
 const addToCart = async (product) => {
-  if (!userId.value) {
-    alert('Usuario no autenticado. Por favor, inicia sesión.');
+  if (!authStore.isAuthenticated) {
+    alert('Por favor, inicia sesión para agregar productos al carrito.');
+    router.push('/login');
     return;
   }
 
   try {
-    const responseCart = await axios.get(`http://localhost:8001/app/carts/${userId.value}`);
-    cartId.value = responseCart.data.message.id;
+    await getCartId();
     await axios.post('http://localhost:8001/app/carts/add', {
-      cartId: cartId.value,
+      cartId: cartId,
       productId: product.id,
       quantity: 1,
     });
@@ -52,9 +60,9 @@ const addToCart = async (product) => {
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8001/app/products/');
-    products.value = response.data.message;
+    products.value = response.data.message; // Accede a message en lugar de data directamente
   } catch (error) {
-    console.error(error);
+    console.error('Error al obtener los productos:', error);
     alert('Error al obtener los productos.');
   }
 });

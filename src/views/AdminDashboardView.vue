@@ -43,11 +43,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
 import ProductManagement from '@/components/ProductManagement.vue';
 import UserManagement from '@/components/UserManagement.vue';
 import RoleManagement from '@/components/RoleManagement.vue';
 
+const authStore = useAuthStore();
+const router = useRouter();
 const drawer = ref(true);
 const currentView = ref('ProductManagement');
 
@@ -61,6 +65,13 @@ const currentViewComponent = computed(() => {
       return RoleManagement;
     default:
       return ProductManagement;
+  }
+});
+
+onMounted(() => {
+  if (authStore.userRoleId !== 1) {
+    alert('No tienes permisos para acceder al panel de administración.');
+    router.push('/home');
   }
 });
 </script>
