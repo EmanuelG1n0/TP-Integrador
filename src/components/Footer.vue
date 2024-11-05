@@ -4,6 +4,20 @@
       <v-col class="text-center white--text">
         &copy; {{ new Date().getFullYear() }} E-Commerce App. Todos los derechos reservados.
       </v-col>
+      <v-col class="text-center">
+        <v-btn icon href="https://www.facebook.com" target="_blank">
+          <v-icon>mdi-facebook</v-icon>
+        </v-btn>
+        <v-btn icon href="https://www.twitter.com" target="_blank">
+          <v-icon>mdi-twitter</v-icon>
+        </v-btn>
+        <v-btn icon href="https://www.instagram.com" target="_blank">
+          <v-icon>mdi-instagram</v-icon>
+        </v-btn>
+        <v-btn icon href="https://wa.me/1158016190" target="_blank">
+          <v-icon>mdi-whatsapp</v-icon>
+        </v-btn>
+      </v-col>
     </v-row>
   </v-footer>
 </template>
