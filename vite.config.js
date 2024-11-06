@@ -20,16 +20,8 @@ export default defineConfig({
       '/app': {
         target: 'http://localhost:8001',
         changeOrigin: true,
-<<<<<<< HEAD
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
-  }
-});
-=======
         rewrite: (path) => path.replace(/^\/app/, ''),
       },
     },
   },
 });
->>>>>>> EmanuelG1n0
