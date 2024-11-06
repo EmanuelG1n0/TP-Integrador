@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <b-navbar toggleable="lg" type="dark" variant="primary" class="navbar-custom">
     <b-navbar-brand href="#">E-Commerce</b-navbar-brand>
     <b-navbar-toggle target="nav-collapse" />
@@ -12,6 +13,22 @@
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
+=======
+  <v-app-bar app color="primary" dark>
+    <v-toolbar-title>E-Commerce</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn text :to="'/'">Home</v-btn>
+    <v-btn text :to="'/catalog'">Catalogo</v-btn>
+    <v-btn text v-if="isAuthenticated" :to="'/cart'">Carrito</v-btn>
+    <v-btn text v-if="isAuthenticated" :to="'/orders'">Órdenes</v-btn>
+    <v-btn text v-if="!isAuthenticated" :to="'/login'">Ingresar</v-btn>
+    <template v-else>
+      <v-btn text v-if="isAdmin" :to="'/admin'">Admin</v-btn>
+      <v-btn text @click="logout">Logout</v-btn>
+      <v-btn text v-if="isAuthenticated" :to="'/profile'">Hola, {{ userName }}</v-btn>
+    </template>
+  </v-app-bar>
+>>>>>>> EmanuelG1n0
 </template>
 
 <script setup>
@@ -21,13 +38,15 @@ import { useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
 const router = useRouter();
-
 const isAuthenticated = computed(() => authStore.isAuthenticated);
+const userName = computed(() => authStore.userName);
+const isAdmin = computed(() => authStore.userRoleId === 1);
 
 const logout = () => {
   authStore.logout();
   router.push('/');
 };
+<<<<<<< HEAD
 </script>
 
 <style scoped>
@@ -54,3 +73,6 @@ const logout = () => {
   }
 }
 </style>
+=======
+</script>
+>>>>>>> EmanuelG1n0

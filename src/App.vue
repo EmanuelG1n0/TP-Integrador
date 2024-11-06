@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <!-- Header - siempre visible -->
+  <v-app>
     <NavBar />
+<<<<<<< HEAD
 
     <!-- Contenedor principal de la aplicación -->
     <main class="centered">
@@ -10,8 +10,13 @@
     </main>
 
     <!-- Footer - siempre visible -->
+=======
+    <v-main>
+      <router-view />
+    </v-main>
+>>>>>>> EmanuelG1n0
     <Footer />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -25,6 +30,7 @@ export default {
     Footer,
   },
 };
+<<<<<<< HEAD
 </script>
 
 <style scoped>
@@ -50,3 +56,6 @@ b-footer {
 }
 
 </style>
+=======
+</script>
+>>>>>>> EmanuelG1n0

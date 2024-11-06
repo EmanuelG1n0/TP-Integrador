@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="login-container d-flex flex-column align-items-center justify-content-center p-4 border border-light rounded shadow" style="background-color: #f8f9fa;">
     <h2 class="mb-4 text-center">Iniciar Sesión</h2>
     <b-form @submit.prevent="submitLogin" class="w-100">
@@ -28,33 +29,63 @@
       </div>
       <b-button type="submit" variant="primary" class="mt-3 w-100">Ingresar</b-button>
     </b-form>
+=======
+  <div>
+    <h2>Iniciar Sesión</h2>
+    <v-form @submit.prevent="submitLogin">
+      <v-text-field
+        label="Email"
+        v-model="mail"
+        type="email"
+        required
+      ></v-text-field>
+      <v-text-field
+        label="Contraseña"
+        v-model="pass"
+        type="password"
+        required
+      ></v-text-field>
+      <v-btn color="primary" type="submit">Ingresar</v-btn>
+    </v-form>
+    <p class="mt-3">¿No tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+>>>>>>> EmanuelG1n0
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
-import axios from '@/plugins/axios';
+import { useAuthStore } from '@/store/auth';
+import axios from 'axios';
 
-const email = ref('');
-const password = ref('');
-const authStore = useAuthStore();
+const mail = ref('');
+const pass = ref('');
 const router = useRouter();
+const authStore = useAuthStore();
 
 const submitLogin = async () => {
   try {
-    const response = await axios.post('/login', {
-      email: email.value,
-      password: password.value
+    const response = await axios.post('http://localhost:8001/app/users/login', {
+      mail: mail.value,
+      pass: pass.value
     });
-    authStore.setUser(response.data.user);
-    authStore.setToken(response.data.token);
-    alert('Inicio de sesión exitoso.');
-    router.push('/');
+    const token = response.data.token;
+    localStorage.setItem('authToken', token); // Guardar el token en el almacenamiento local
+    await authStore.login(token); // Llamar a la acción login con el token
+
+    const roleId = authStore.user.RoleId;
+    if (roleId === 1) {
+      alert('Inicio de sesión exitoso');
+      router.push('/admin'); // Redirigir al panel de administración si el usuario tiene roleId 1
+    } else if (roleId === 2) {
+      alert('Inicio de sesión exitoso');
+      router.push('/'); // Redirigir a la página de inicio si el usuario tiene roleId 2
+    } else {
+      alert('No tienes permisos para acceder al panel de administración.');
+    }
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
-    alert('Error al iniciar sesión.');
+    alert('Error al iniciar sesión. Verifique sus credenciales e intente nuevamente.');
   }
 };
 </script>
