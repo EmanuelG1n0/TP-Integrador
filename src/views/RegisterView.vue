@@ -1,54 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="container d-flex justify-content-center align-items-center " >
-    <div class="register-container">
-      <div class="card shadow" >
-        <div class="card-header text-center">
-          <h4>Crear Cuenta</h4>
-        </div>
-        <div class="card-body">
-          <form @submit.prevent="handleRegister">
-            <div class="mb-3">
-              <label for="name" class="form-label">Nombre</label>
-              <input
-                id="name"
-                type="text"
-                class="form-control"
-                v-model="name"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="email" class="form-label">Correo electrónico</label>
-              <input
-                id="email"
-                type="email"
-                class="form-control"
-                v-model="email"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="password" class="form-label">Contraseña</label>
-              <input
-                id="password"
-                type="password"
-                class="form-control"
-                v-model="password"
-                required
-              />
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100 mt-3">
-              Crear
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-=======
   <div class="register-container">
     <v-card class="mx-auto" max-width="500">
       <v-card-title class="text-center">Crear Cuenta</v-card-title>
@@ -109,7 +59,6 @@
         </form>
       </v-card-text>
     </v-card>
->>>>>>> EmanuelG1n0
   </div>
 </template>
 
@@ -132,19 +81,6 @@ export default {
     };
   },
   methods: {
-<<<<<<< HEAD
-    handleRegister() {
-      axios.post('/register', {
-        name: this.name,
-        email: this.email,
-        password: this.password
-      })
-      .then(response => {
-        console.log('Registrando:', response.data);
-        // Redirigir o mostrar mensaje de éxito
-      })
-      .catch(error => {
-=======
     async handleRegister() {
       try {
         const response = await axios.post('http://localhost:8001/app/users/', {
@@ -162,7 +98,6 @@ export default {
         alert('Registro exitoso');
         this.$router.push('/login'); // Redirige al login después del registro
       } catch (error) {
->>>>>>> EmanuelG1n0
         console.error('Error registrando:', error);
         alert('Error al registrar. Por favor, intente nuevamente.');
       }
@@ -172,19 +107,7 @@ export default {
 </script>
 
 <style scoped>
-<<<<<<< HEAD
-/* Estilos opcionales */
-.container {
-  max-width: 600px; 
-  width: 100%; 
-  min-height: 500px; 
-  margin: 50px auto;
-  padding: 20px;
-}
-</style>
-=======
 .register-container {
   padding: 20px;
 }
 </style>
->>>>>>> EmanuelG1n0

@@ -1,17 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="container mt-5">
-    <div class="title-container text-center mb-4">
-      <h2 class="display-4">Catálogo de Productos</h2>
-    </div>
-    <b-row>
-      <b-col cols="12" md="4" v-for="product in products" :key="product.id" class="mb-4">
-        <ProductCard
-          :name="product.name"
-          :description="product.description"
-          :price="product.price"
-          :brand="product.brand"
-=======
   <div>
     <h2>Catálogo de Productos</h2>
     <v-row>
@@ -23,7 +10,6 @@
         <ProductCard
           :product="product"
           @add-to-cart="addToCart"
->>>>>>> EmanuelG1n0
         />
       </v-col>
     </v-row>
