@@ -1,23 +1,45 @@
 <template>
-  <div>
-    <h2>Iniciar Sesión</h2>
-    <v-form @submit.prevent="submitLogin">
-      <v-text-field
-        label="Email"
-        v-model="mail"
-        type="email"
-        required
-      ></v-text-field>
-      <v-text-field
-        label="Contraseña"
-        v-model="pass"
-        type="password"
-        required
-      ></v-text-field>
-      <v-btn color="primary" type="submit">Ingresar</v-btn>
-    </v-form>
-    <p class="mt-3">¿No tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
-  </div>
+  <v-container class="fill-height" fluid>
+    <v-row align="center" justify="center">
+      <v-col cols="12" md="6">
+        <v-card class="login-card">
+          <v-card-title class="text-center">Iniciar Sesión</v-card-title>
+          <v-card-text>
+            <v-form @submit.prevent="submitLogin">
+              <v-text-field
+                label="Email"
+                v-model="mail"
+                type="email"
+                required
+                outlined
+                dense
+                class="mb-4"
+              ></v-text-field>
+              <v-text-field
+                label="Contraseña"
+                v-model="pass"
+                type="password"
+                required
+                outlined
+                dense
+                class="mb-4"
+              ></v-text-field>
+              <v-btn color="primary" type="submit" block large>Ingresar</v-btn>
+            </v-form>
+            <v-divider class="my-4"></v-divider>
+            <p class="register-link">
+              ¿No tienes una cuenta? <v-btn text to="/register" color="primary">Regístrate aquí</v-btn>
+            </p>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6" class="d-none d-md-flex align-center justify-center">
+        <div class="login-message">
+          <h2>Ingresá tu e-mail para iniciar sesión</h2>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
@@ -38,14 +60,13 @@ const submitLogin = async () => {
       pass: pass.value
     });
     const token = response.data.token;
-    localStorage.setItem('authToken', token); // Guardar el token en el almacenamiento local
-    await authStore.login(token); // Llamar a la acción login con el token
+    localStorage.setItem('authToken', token);
+    await authStore.login(token);
 
-    // Redirigir según el rol del usuario
     if (authStore.isAdminGetter) {
-      router.push('/admin'); // Redirigir a la página de administración si es administrador
+      router.push('/admin');
     } else {
-      router.push('/home'); // Redirigir a la página de inicio si no es administrador
+      router.push('/home');
     }
 
     alert('Inicio de sesión exitoso');
@@ -57,5 +78,28 @@ const submitLogin = async () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+.login-container {
+  padding: 40px 30px;
+  margin-top: 100px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.register-link {
+  font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  .login-container {
+    margin-top: 50px;
+    padding: 20px;
+  }
+}
 </style>
