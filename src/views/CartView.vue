@@ -57,6 +57,7 @@ const generateOrder = async () => {
   try {
     const response = await axios.post(`http://localhost:8001/app/carts/${userId.value}/generate-order`);
     alert('Orden generada con éxito');
+    await getCartItems(); // Recargar los ítems del carrito después de generar la orden
   } catch (error) {
     console.error('Error al generar la orden:', error);
     alert('Error al generar la orden.');
