@@ -1,44 +1,55 @@
 <template>
-    <div>
-      <h2>Perfil de Usuario</h2>
-      <b-form @submit.prevent="updateProfile">
-        <b-form-group label="Nombre">
-          <b-form-input v-model="user.name"></b-form-input>
-        </b-form-group>
-        <b-form-group label="Email">
-          <b-form-input v-model="user.email" disabled></b-form-input>
-        </b-form-group>
-        <!-- Otros campos si es necesario -->
-        <b-button type="submit" variant="primary">Actualizar Perfil</b-button>
-      </b-form>
-    </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted } from 'vue';
-  import axios from 'axios';
-  import { useAuthStore } from '@/store/auth';
-  
-  const authStore = useAuthStore();
-  const user = ref({});
-  
-  onMounted(() => {
-    user.value = { ...authStore.user };
-  });
-  
-  const updateProfile = async () => {
-    try {
-      const response = await axios.put('/api/users/profile', user.value);
-      authStore.setUser(response.data);
-      alert('Perfil actualizado con éxito.');
-    } catch (error) {
-      console.error(error);
-      alert('Error al actualizar el perfil.');
+  <div>
+    <h2>Perfil de Usuario</h2>
+    <ProfileCard :user="user" @update="handleUpdate" />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/store/auth';
+import ProfileCard from '@/components/ProfileCard.vue';
+import axios from 'axios';
+
+const authStore = useAuthStore();
+const router = useRouter();
+const user = ref({});
+
+const fetchUserDetails = async (userId) => {
+  try {
+    const response = await axios.get(`http://localhost:8001/app/users/${userId}`);
+    const userData = response.data;
+    if (userData.dateOfBirth) {
+      userData.dateOfBirth = new Date(userData.dateOfBirth).toISOString().split('T')[0];
     }
-  };
-  </script>
-  
-  <style scoped>
-  /* Tus estilos aquí */
-  </style>
-  
+    user.value = userData;
+  } catch (error) {
+    console.error('Error al obtener los detalles del usuario:', error);
+    alert('Error al obtener los detalles del usuario.');
+  }
+};
+
+onMounted(() => {
+  if (!authStore.isAuthenticated) {
+    router.push('/login');
+  } else {
+    const userId = authStore.userId;
+    if (userId) {
+      fetchUserDetails(userId);
+    } else {
+      console.error('User ID is undefined');
+      alert('Error al obtener el ID del usuario.');
+    }
+  }
+});
+
+const handleUpdate = (updatedUser) => {
+  user.value = updatedUser;
+  authStore.setUser(updatedUser); // Actualizar el estado de autenticación con los datos actualizados del usuario
+};
+</script>
+
+<style scoped>
+/* Tus estilos aquí */
+</style>

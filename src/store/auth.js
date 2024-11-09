@@ -5,46 +5,44 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     token: null,
-    roleId: null, // Añadir roleId al estado
+    roleId: null,
+    isAdmin: false,
   }),
   actions: {
-    async login(token) {
+    async fetchUser() {
       try {
-        // Guardar el token en el estado
-        this.token = token;
-
-        // Establecer el header de autorización para futuras solicitudes
-        axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
-
-        // Obtener la información del usuario usando el token
         const response = await axios.get('http://localhost:8001/app/users/loginToken');
-        this.user = response.data.user;
-        this.roleId = response.data.user.RoleId; // Guardar el RoleId en el estado
-        console.log('User:', this.user); // Verifica que el usuario se esté guardando correctamente
-        console.log('RoleId:', this.roleId); // Verifica que el RoleId se esté guardando correctamente
+        const userData = response.data.user;
+        this.user = { id: userData.id, name: userData.name };
+        this.roleId = userData.RoleId;
+        this.isAdmin = userData.RoleId === 1; // Ajusta esto según tu lógica de roles
       } catch (error) {
-        console.error('Error during login:', error);
-        throw new Error('Error during login');
+        console.error('Error al cargar la información del usuario:', error);
       }
+    },
+    async login(token) {
+      this.token = token;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      localStorage.setItem('authToken', token);
+      await this.fetchUser();
     },
     logout() {
       this.user = null;
       this.token = null;
-      this.roleId = null; // Limpiar roleId al cerrar sesión
+      this.roleId = null;
+      this.isAdmin = false;
       delete axios.defaults.headers.common['Authorization'];
-
-      // Eliminar el token del almacenamiento local
       localStorage.removeItem('authToken');
     },
     setUser(updatedUser) {
-      this.user = updatedUser;
-      this.roleId = updatedUser.RoleId; // Actualizar roleId cuando se actualiza el usuario
-    },
+      this.user = { id: updatedUser.id, name: updatedUser.name };
+      this.roleId = updatedUser.RoleId;
+    }
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
     userName: (state) => (state.user ? state.user.name : ''),
     userId: (state) => (state.user ? state.user.id : null),
-    userRoleId: (state) => state.roleId, // Añadir getter para roleId
+    isAdminGetter: (state) => state.isAdmin,
   },
 });
