@@ -20,18 +20,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 import OrderCard from '@/components/OrderCard.vue';
 
 const authStore = useAuthStore();
-const userId = authStore.userId;
+const userId = ref(authStore.userId);
 const orders = ref([]);
 
 const fetchOrders = async () => {
   try {
-    const response = await axios.get(`http://localhost:8001/app/orders/user/${userId}`);
+    const response = await axios.get(`http://localhost:8001/app/orders/user/${userId.value}`);
     orders.value = response.data.orders;
   } catch (error) {
     console.error('Error al obtener las órdenes:', error);
@@ -39,7 +39,21 @@ const fetchOrders = async () => {
   }
 };
 
-onMounted(fetchOrders);
+onMounted(() => {
+  if (userId.value) {
+    fetchOrders();
+  } else {
+    watch(
+      () => authStore.userId,
+      (newUserId) => {
+        if (newUserId) {
+          userId.value = newUserId;
+          fetchOrders();
+        }
+      }
+    );
+  }
+});
 </script>
 
 <style scoped>
