@@ -1,14 +1,14 @@
 <template>
-  <v-card>
+  <v-card class="product-card">
     <v-img :src="product.imageUrl" :alt="product.name" class="product-image"></v-img>
     <v-card-title>{{ product.name }}</v-card-title>
     <v-card-text>
       <p><strong>Marca:</strong> {{ product.brand }}</p>
       <p><strong>Precio:</strong> ${{ product.price }}</p>
     </v-card-text>
-    <v-card-actions>
-      <v-btn color="primary" @click="handleAddToCart">Agregar al Carrito</v-btn>
-      <v-btn color="secondary" @click="viewDetails">Ver Detalles</v-btn>
+    <v-card-actions class="d-flex justify-center">
+      <v-btn @click="handleAddToCart">Agregar al Carrito</v-btn>
+      <v-btn   @click="viewDetails">Ver Detalles</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -35,10 +35,49 @@ const viewDetails = () => {
 </script>
 
 <style scoped>
+.product-card {
+  max-width: 400px;
+  width: 100%;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .product-image {
   width: 100%;
-  height: auto;
+  height: 200px;
   object-fit: cover;
   margin-bottom: 10px;
+}
+
+.v-card-title,
+.v-card-text {
+  text-align: center;
+}
+
+.v-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.v-btn {
+ color: antiquewhite;
+}
+
+@media (max-width: 600px) {
+  .product-card {
+    max-width: 100%;
+  }
+
+  .product-image {
+    height: 150px; /* Reduce the height of the image on smaller screens */
+  }
+
+  .v-card-actions {
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+  }
 }
 </style>

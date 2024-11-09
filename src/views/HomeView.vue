@@ -33,20 +33,14 @@ import { useRouter } from 'vue-router';
 const products = ref([
   {
     id: 1,
-    name: 'Producto 1',
-    description: 'Descripción del producto 1.',
     image: 'https://via.placeholder.com/800x400?text=Producto+1',
   },
   {
     id: 2,
-    name: 'Producto 2',
-    description: 'Descripción del producto 2.',
     image: 'https://via.placeholder.com/800x400?text=Producto+2',
   },
   {
     id: 3,
-    name: 'Producto 3',
-    description: 'Descripción del producto 3.',
     image: 'https://via.placeholder.com/800x400?text=Producto+3',
   },
 ]);
