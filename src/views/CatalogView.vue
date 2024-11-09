@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <h2>Catálogo de Productos</h2>
-    <v-row>
+  <div class="catalog-container">
+    <div class="text-center my-5">
+      <h2 class="display-4">Catálogo de Productos</h2>
+      <p class="lead text-muted">Encuentra productos de calidad a los mejores precios</p>
+    </div>
+    <!-- Catálogo de productos -->
+    <v-row dense justify="center">
       <v-col
-        cols="4"
         v-for="product in products"
         :key="product.id"
-      >
-        <ProductCard
-          :product="product"
-          @add-to-cart="addToCart"
-        />
+        :cols="2.8"  
+        class="mb-4 d-flex justify-center" >
+        <ProductCard :product="product" @add-to-cart="addToCart" class="small-product-card"/>
       </v-col>
     </v-row>
   </div>
@@ -25,7 +26,7 @@ import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
 const userId = authStore.userId;
-let cartId = authStore.cartId; // Cambiado a let para permitir la reasignación
+let cartId = authStore.cartId;
 const products = ref([]);
 const router = useRouter();
 
@@ -69,11 +70,44 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.title-container {
-  margin: 20px 0;
+.catalog-container {
+  padding: 50px;
 }
 
 h2 {
-  margin: 0;
+  font-weight: bold;
+  color: #343a40;
+}
+
+p {
+  color: #6c757d;
+}
+
+.v-row {
+  margin-top: 30px;
+}
+
+.v-col {
+  display: flex;
+  justify-content: center;
+}
+
+.small-product-card {
+  max-width: 300px;  /* Reduce el tamaño máximo de la tarjeta */
+  margin: 0 auto;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .catalog-container {
+    padding: 20px;
+  }
+
+  .small-product-card {
+    max-width: 220px;  /* Reducir aún más en pantallas pequeñas */
+  }
 }
 </style>

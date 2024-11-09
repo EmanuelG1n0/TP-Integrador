@@ -10,7 +10,7 @@ import OrderDetailsView from '@/views/OrderDetailsView.vue';
 import AdminDashboardView from '@/views/AdminDashboardView.vue';
 import ProfileView from '../views/ProfileView.vue';
 import { useAuthStore } from '@/store/auth';
-
+import AboutView from '../views/AboutView.vue';
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
@@ -21,6 +21,8 @@ const routes = [
   { path: '/register', name: 'Register', component: RegisterView },
   { path: '/orders', name: 'Orders', component: OrderDetailsView },
   { path: '/admin', name: 'AdminDashboard', component: AdminDashboardView, meta: { requiresAuth: true } },
+  { path: '/about', name: 'AboutView', component: AboutView },
+
 ];
 
 const router = createRouter({

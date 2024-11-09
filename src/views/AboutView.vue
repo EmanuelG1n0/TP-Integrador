@@ -1,15 +1,16 @@
 <template>
-  <div class="about-page container mt-5">
+  <v-container class="about-page mt-5">
     <!-- Section Title -->
-    <div class="text-center mb-5">
-      <h1 class="display-4">Sobre Nosotros</h1>
-      <p class="lead text-muted">Productos de calidad a buen precio.</p>
-    </div>
+    <v-row class="text-center mb-5">
+      <v-col>
+        <h1 class="display-3 font-weight-bold">Sobre Nosotros</h1>
+        <p class="lead text-muted">Productos de calidad a buen precio.</p>
+      </v-col>
+    </v-row>
 
     <!-- Sección Sobre Nosotros -->
-    <div class="row">
-      <!-- Sección de Descripción -->
-      <div class="col-md-8 mx-auto mb-4">
+    <v-row>
+      <v-col md="8" class="mx-auto mb-4">
         <p>
           Bienvenido a <strong>Nuestra Tienda en Línea</strong>, tu fuente número uno para todo lo relacionado
           con [producto, ropa, electrónica, etc.]. Nos dedicamos a ofrecerte los mejores productos,
@@ -20,103 +21,98 @@
           de nuestros productos tanto como nosotros disfrutamos ofrecértelos.
         </p>
         <div class="text-center">
-        <a href="/catalog" class="btn btn-primary">Comprar Ahora</a>
-      </div>
-      </div>
-    </div>
+          <v-btn color="primary" to="/catalog" large>Comprar Ahora</v-btn>
+        </div>
+      </v-col>
+    </v-row>
 
     <!-- Sección de Valores -->
-    <div class="row text-center my-5">
-      <div class="col-md-4">
-        <div class="icon-box mb-4">
-          <i class="bi bi-truck display-4 text-primary"></i>
-        </div>
-        <h3>Entrega Rápida</h3>
+    <v-row class="text-center my-5">
+      <v-col md="4" class="mb-4">
+        <v-icon large color="primary">mdi-truck-fast</v-icon>
+        <h3 class="mt-2">Entrega Rápida</h3>
         <p>Aseguramos que tus productos se entreguen rápida y seguramente a tu puerta.</p>
-      </div>
+      </v-col>
 
-      <div class="col-md-4">
-        <div class="icon-box mb-4">
-          <i class="bi bi-credit-card display-4 text-primary"></i>
-        </div>
-        <h3>Pagos Seguros</h3>
+      <v-col md="4" class="mb-4">
+        <v-icon large color="primary">mdi-credit-card</v-icon>
+        <h3 class="mt-2">Pagos Seguros</h3>
         <p>Pagos 100% seguros a través de plataformas confiables para garantizar tu privacidad y seguridad.</p>
-      </div>
+      </v-col>
 
-      <div class="col-md-4">
-        <div class="icon-box mb-4">
-          <i class="bi bi-star display-4 text-primary"></i>
-        </div>
-        <h3>Alta Calidad</h3>
+      <v-col md="4" class="mb-4">
+        <v-icon large color="primary">mdi-star</v-icon>
+        <h3 class="mt-2">Alta Calidad</h3>
         <p>Garantizamos productos de alta calidad, seleccionados de las mejores fuentes a nivel mundial.</p>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
 
     <!-- Sección del Equipo -->
-    <div class="team-section text-center my-5">
-      <h2>Conoce a Nuestro Equipo</h2>
-      <div class="row justify-content-center">
-        <div class="col-md-3 mb-4">
-          <img src="../assets/Integrantes/Sebastian.jpeg" alt="Miembro del Equipo" class="rounded-circle mb-3" />
-          <h4>Emanuel Ginovski</h4>
-          <p>Fundadora y CEO</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <img src="../assets/Integrantes/Jonathan.jpeg" alt="Miembro del Equipo" class="rounded-circle mb-3" />
-          <h4>Jonathan Vitangeli</h4>
-          <p>Jefe de Ventas</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <img src="../assets/Integrantes/Emanuel.jpg" alt="Miembro del Equipo" class="rounded-circle mb-3" />
-          <h4>Sebastian Zavala</h4>
-          <p>Jefe de Ventas</p>
-        </div>
-        <div class="col-md-3 mb-4">
-          <img src="../assets/Integrantes/Rodolfo.jpg" alt="Miembro del Equipo" class="rounded-circle mb-3" />
-          <h4>Rodolfo Messina</h4>
-          <p>Jefe de Ventas</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    <v-row class="text-center my-5">
+      <v-col md="3" class="mb-4">
+        <v-avatar size="150" class="mx-auto" :style="{ border: '3px solid #007bff' }">
+          <img src="../assets/Integrantes/Sebastian.jpeg" alt="Emanuel Ginovski" />
+        </v-avatar>
+        <h4>Emanuel Ginovski</h4>
+        <p>Fundador y CEO</p>
+      </v-col>
+      <v-col md="3" class="mb-4">
+        <v-avatar size="150" class="mx-auto" :style="{ border: '3px solid #007bff' }">
+          <img src="../assets/Integrantes/Jonathan.jpeg" alt="Jonathan Vitangeli" />
+        </v-avatar>
+        <h4>Jonathan Vitangeli</h4>
+        <p>Jefe de Ventas</p>
+      </v-col>
+      <v-col md="3" class="mb-4">
+        <v-avatar size="150" class="mx-auto" :style="{ border: '3px solid #007bff' }">
+          <img src="../assets/Integrantes/Emanuel.jpg" alt="Sebastian Zavala" />
+        </v-avatar>
+        <h4>Sebastian Zavala</h4>
+        <p>Jefe de Ventas</p>
+      </v-col>
+      <v-col md="3" class="mb-4">
+        <v-avatar size="150" class="mx-auto" :style="{ border: '3px solid #007bff' }">
+          <img src="../assets/Integrantes/Rodolfo.jpg" alt="Rodolfo Messina" />
+        </v-avatar>
+        <h4>Rodolfo Messina</h4>
+        <p>Jefe de Ventas</p>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
-
+// No es necesario agregar lógica en este componente, ya que es principalmente estático.
 </script>
 
 <style scoped>
 .about-page {
-  background-color: #f8f9fa; 
-  border-radius: 10px; 
-  padding: 20px; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.about-page h1 {
-  font-size: 3rem;
+.v-avatar img {
+  object-fit: contain; 
+  width: 100%;
+  height: 100%;
+}
+
+.v-col h4 {
   font-weight: bold;
-  color: #343a40; 
+  color: #343a40;
 }
 
-.about-page .icon-box {
-  margin-bottom: 1.5rem;
+.v-btn {
+  font-weight: bold;
+}
+
+.v-icon {
   transition: transform 0.3s;
 }
 
-.about-page .icon-box:hover {
+.v-icon:hover {
   transform: translateY(-5px);
-}
-
-.rounded-circle {
-  width: 150px; 
-  height: 150px; 
-  object-fit: cover; 
-  border: 3px solid #007bff; 
-  transition: transform 0.3s; 
-}
-
-.rounded-circle:hover {
-  transform: scale(1.05); 
 }
 </style>

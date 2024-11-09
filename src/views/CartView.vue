@@ -2,16 +2,15 @@
   <div>
     <h1>Carrito de Compras</h1>
     <div v-if="cartItems.length">
-      <v-row>
-        <v-col
-          cols="4"
-          v-for="item in cartItems"
-          :key="item.id"
-        >
-          <CartItem :product="item.Product" :quantity="item.quantity" :cartId="cartId" @remove-from-cart="removeFromCart" />
+      <v-row dense justify="center">
+        <v-col v-for="item in cartItems" :key="item.id" :cols="2.8" class="mb-4 d-flex justify-center">
+          <CartItem :product="item.Product" :quantity="item.quantity" :cartId="cartId"
+            @remove-from-cart="removeFromCart" class="cart-item" />
         </v-col>
       </v-row>
-      <v-btn color="primary" @click="generateOrder">Realizar Orden</v-btn>
+      <!-- Botón "Realizar Orden" alineado a la derecha -->
+      <v-btn color="primary" @click="generateOrder" class="mt-4 wide-btn d-flex justify-end ml-auto">Realizar
+        Orden</v-btn>
     </div>
     <div v-else>
       <p>Tu carrito está vacío.</p>
@@ -82,5 +81,51 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+
+/* Margen superior para el título */
+h1 {
+  margin-bottom: 20px;
+}
+
+.v-row {
+  margin-top: 30px;
+}
+
+/* Responsividad de los productos en el carrito */
+.v-col {
+  display: flex;
+  justify-content: center;
+}
+
+/* Estilo para las tarjetas (CartItem) para hacerlas más pequeñas */
+.cart-item {
+  font-size: 12px;
+  max-width: 250px;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.wide-btn {
+  text-align: center;
+  height: 50px;
+  margin: 30px;
+  font-size: 16px;
+}
+
+.v-btn {
+  width: 200px;
+}
+
+@media (max-width: 600px) {
+  .cart-item {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .wide-btn {
+    font-size: 14px;
+    width: 200px;
+  }
+}
 </style>

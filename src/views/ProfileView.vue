@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile-container">
     <h2>Perfil de Usuario</h2>
     <ProfileCard :user="user" @update="handleUpdate" />
   </div>
@@ -51,5 +51,43 @@ const handleUpdate = (updatedUser) => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+/* Estilos generales para el perfil */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 1200px; /* Limitar el ancho máximo del contenedor */
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Asegurar que ProfileCard tenga un espaciado adecuado */
+.profile-container .v-card {
+  width: 100%;
+  max-width: 800px; /* Limitar el ancho máximo del card */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f9f9f9; /* Fondo ligeramente gris */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .profile-container .v-card {
+    width: 90%; /* Hacer el card más estrecho en pantallas pequeñas */
+    padding: 15px;
+  }
+}
 </style>
