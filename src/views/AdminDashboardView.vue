@@ -50,10 +50,11 @@ import ProductManagement from '@/components/ProductManagement.vue';
 import UserManagement from '@/components/UserManagement.vue';
 import RoleManagement from '@/components/RoleManagement.vue';
 
-const authStore = useAuthStore();
 const router = useRouter();
+const authStore = useAuthStore();
 const drawer = ref(true);
 const currentView = ref('ProductManagement');
+
 const currentViewComponent = computed(() => {
   switch (currentView.value) {
     case 'ProductManagement':
@@ -67,14 +68,16 @@ const currentViewComponent = computed(() => {
   }
 });
 
-onMounted(() => {
-  if (authStore.isAuthenticated) {
+onMounted(async () => {
+  try {
+    await authStore.fetchUser(); // Asegúrate de que esta función exista y cargue la información del usuario
     if (!authStore.isAdminGetter) {
       alert('No tienes permisos para acceder al panel de administración.');
       router.push('/home');
     }
-  } else {
-    router.push('/login');
+  } catch (error) {
+    console.error('Error al verificar permisos de administrador:', error);
+    router.push('/home');
   }
 });
 </script>
