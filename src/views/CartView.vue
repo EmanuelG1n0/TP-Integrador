@@ -20,19 +20,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 import CartItem from '@/components/CartItem.vue';
 
 const authStore = useAuthStore();
-const userId = authStore.userId;
+const userId = ref(authStore.userId);
 const cartItems = ref([]);
 const cartId = ref(null);
 
 const getCartItems = async () => {
   try {
-    const response = await axios.get(`http://localhost:8001/app/carts/${userId}`);
+    const response = await axios.get(`http://localhost:8001/app/carts/${userId.value}`);
     cartItems.value = response.data.message.CartItems;
     cartId.value = response.data.message.id;
   } catch (error) {
@@ -56,7 +56,7 @@ const removeFromCart = async (productId) => {
 
 const generateOrder = async () => {
   try {
-    const response = await axios.post(`http://localhost:8001/app/carts/${userId}/generate-order`);
+    const response = await axios.post(`http://localhost:8001/app/carts/${userId.value}/generate-order`);
     alert('Orden generada con éxito');
   } catch (error) {
     console.error('Error al generar la orden:', error);
@@ -64,8 +64,20 @@ const generateOrder = async () => {
   }
 };
 
-onMounted(async () => {
-  await getCartItems();
+onMounted(() => {
+  if (userId.value) {
+    getCartItems();
+  } else {
+    watch(
+      () => authStore.userId,
+      (newUserId) => {
+        if (newUserId) {
+          userId.value = newUserId;
+          getCartItems();
+        }
+      }
+    );
+  }
 });
 </script>
 

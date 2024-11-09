@@ -46,6 +46,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/store/auth';
+import axios from 'axios';
 import ProductManagement from '@/components/ProductManagement.vue';
 import UserManagement from '@/components/UserManagement.vue';
 import RoleManagement from '@/components/RoleManagement.vue';
@@ -54,7 +55,6 @@ const authStore = useAuthStore();
 const router = useRouter();
 const drawer = ref(true);
 const currentView = ref('ProductManagement');
-
 const currentViewComponent = computed(() => {
   switch (currentView.value) {
     case 'ProductManagement':
@@ -68,10 +68,30 @@ const currentViewComponent = computed(() => {
   }
 });
 
-onMounted(() => {
-  if (authStore.userRoleId !== 1) {
-    alert('No tienes permisos para acceder al panel de administración.');
+const isAdmin = ref(false);
+
+const checkAdmin = async () => {
+  try {
+    const response = await axios.post('http://localhost:8001/app/users/check-admin', {
+      RoleId: authStore.userRoleId
+    });
+    isAdmin.value = response.data.isAdmin;
+    if (!isAdmin.value) {
+      alert('No tienes permisos para acceder al panel de administración.');
+      router.push('/home');
+    }
+  } catch (error) {
+    console.error('Error al verificar si el usuario es administrador:', error);
+    alert('Error al verificar permisos de administrador.');
     router.push('/home');
+  }
+};
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    checkAdmin();
+  } else {
+    router.push('/login');
   }
 });
 </script>

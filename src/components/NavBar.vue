@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
 
@@ -24,10 +24,20 @@ const authStore = useAuthStore();
 const router = useRouter();
 const isAuthenticated = computed(() => authStore.isAuthenticated);
 const userName = computed(() => authStore.userName);
-const isAdmin = computed(() => authStore.userRoleId === 1);
+const isAdmin = computed(() => authStore.isAdminGetter); // Obtener isAdmin del getter
+
+onMounted(() => {
+  if (authStore.isAuthenticated) {
+    // No es necesario llamar a checkAdmin aquí porque ya se maneja en el store
+  }
+});
 
 const logout = () => {
   authStore.logout();
   router.push('/');
 };
 </script>
+
+<style scoped>
+/* Tus estilos aquí */
+</style>

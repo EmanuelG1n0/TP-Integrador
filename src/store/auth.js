@@ -5,7 +5,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     token: null,
-    roleId: null, // Añadir roleId al estado
+    roleId: null,
+    isAdmin: false, // Añadir isAdmin al estado
   }),
   actions: {
     async login(token) {
@@ -16,12 +17,20 @@ export const useAuthStore = defineStore('auth', {
         // Establecer el header de autorización para futuras solicitudes
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`;
 
+        // Guardar el token en el almacenamiento local
+        localStorage.setItem('authToken', token);
+
         // Obtener la información del usuario usando el token
         const response = await axios.get('http://localhost:8001/app/users/loginToken');
-        this.user = response.data.user;
-        this.roleId = response.data.user.RoleId; // Guardar el RoleId en el estado
-        console.log('User:', this.user); // Verifica que el usuario se esté guardando correctamente
-        console.log('RoleId:', this.roleId); // Verifica que el RoleId se esté guardando correctamente
+        const userData = response.data.user; // Asegúrate de acceder a la propiedad correcta en la respuesta
+        this.user = { id: userData.id, name: userData.name }; // Guardar el id y el nombre del usuario en el estado
+        this.roleId = userData.RoleId; // Guardar el RoleId en el estado
+
+        // Verificar si el usuario es administrador
+        const adminCheckResponse = await axios.post('http://localhost:8001/app/users/check-admin', {
+          RoleId: this.roleId
+        });
+        this.isAdmin = adminCheckResponse.data.isAdmin; // Guardar isAdmin en el estado
       } catch (error) {
         console.error('Error during login:', error);
         throw new Error('Error during login');
@@ -30,21 +39,23 @@ export const useAuthStore = defineStore('auth', {
     logout() {
       this.user = null;
       this.token = null;
-      this.roleId = null; // Limpiar roleId al cerrar sesión
+      this.roleId = null;
+      this.isAdmin = false; // Limpiar isAdmin al cerrar sesión
       delete axios.defaults.headers.common['Authorization'];
 
       // Eliminar el token del almacenamiento local
       localStorage.removeItem('authToken');
     },
     setUser(updatedUser) {
-      this.user = updatedUser;
+      this.user = { id: updatedUser.id, name: updatedUser.name };
       this.roleId = updatedUser.RoleId; // Actualizar roleId cuando se actualiza el usuario
-    },
+    }
   },
   getters: {
     isAuthenticated: (state) => !!state.token,
     userName: (state) => (state.user ? state.user.name : ''),
     userId: (state) => (state.user ? state.user.id : null),
-    userRoleId: (state) => state.roleId, // Añadir getter para roleId
+    userRoleId: (state) => state.roleId,
+    isAdminGetter: (state) => state.isAdmin, // Renombrar getter para isAdmin
   },
 });
