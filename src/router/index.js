@@ -15,7 +15,7 @@ const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },
   { path: '/profile', name: 'Profile', component: ProfileView },
-  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView, props: true},
+  { path: '/product/:id', name: 'ProductDetails', component: ProductDetailsView, props: true },
   { path: '/cart', name: 'Cart', component: CartView },
   { path: '/login', name: 'Login', component: LoginView },
   { path: '/register', name: 'Register', component: RegisterView },
