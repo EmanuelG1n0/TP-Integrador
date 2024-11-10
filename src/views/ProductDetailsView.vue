@@ -11,7 +11,7 @@
       <p class="product-price"><strong>Precio:</strong> ${{ product.price }}</p>
       <p><strong>Marca:</strong> {{ product.brand }}</p>
       <p><strong>Stock:</strong> {{ product.stock }}</p>
-      <v-btn color="primary" @click="addToCart">Agregar al Carrito</v-btn>
+      <v-btn :disabled="product.stock === 0" color="primary" @click="addToCart">Agregar al Carrito</v-btn>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ const route = useRoute();
 const router = useRouter();
 const product = ref({});
 const authStore = useAuthStore();
+
 const userId = authStore.userId;
 let cartId = authStore.cartId;
 
@@ -52,7 +53,6 @@ const addToCart = async () => {
     router.push('/login');
     return;
   }
-
   try {
     await getCartId();
     await axios.post('http://localhost:8001/app/carts/add', {
