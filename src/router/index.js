@@ -11,6 +11,7 @@ import AdminDashboardView from '@/views/AdminDashboardView.vue';
 import ProfileView from '../views/ProfileView.vue';
 import { useAuthStore } from '@/store/auth';
 import AboutView from '../views/AboutView.vue';
+
 const routes = [
   { path: '/', name: 'Home', component: HomeView },
   { path: '/catalog', name: 'Catalog', component: CatalogView },

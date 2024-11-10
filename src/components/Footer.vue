@@ -27,15 +27,5 @@
 </script>
 
 <style scoped>
-.v-btn {
-  padding: 0;
-}
-.v-icon {
-  font-size: 24px;
-}
-@media (max-width: 600px) {
-  .v-icon {
-    font-size: 18px;
-  }
-}
+
 </style>

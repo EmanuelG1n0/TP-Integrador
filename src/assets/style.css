@@ -3,15 +3,14 @@
 
 /* Variables de colores y estilos para Vuetify */
 :root {
-  --v-primary-base: #ec1b5a;
-  --v-secondary-base: #3483fa;
-  --v-accent-base: #00a650;
-  --v-error-base: #f44336;
-  --v-warning-base: #ffeb3b;
-  --v-info-base: #2196f3;
-  --v-success-base: #4caf50;
+  --v-primary-base: #4a90e2; /* Azul */
+  --v-secondary-base: #50e3c2; /* Verde menta */
+  --v-accent-base: #f5a623; /* Naranja */
+  --v-error-base: #d0021b; /* Rojo */
+  --v-warning-base: #f8e71c; /* Amarillo */
+  --v-info-base: #9013fe; /* Púrpura */
+  --v-success-base: #d321bb; /* Verde */
 }
-
 /* Estilos globales para Vuetify */
 .v-application {
   font-family: 'Poppins', sans-serif;
@@ -19,17 +18,21 @@
   color: #333333;
 }
 
-/* Estilos para botones en Vuetify */
 .v-btn {
   background-color: var(--v-primary-base);
-  color: white;
+  color: white; /* Asegúrate de que el color del texto sea blanco */
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
+
 .v-btn:hover {
-  background-color: hsl(340, 100%, 50%);
+  background-color: hsl(210, 100%, 50%);
 }
 
+/* Estilos específicos para botones en el carrito */
+.cart-btn {
+  color: white !important; /* Fuerza el color del texto a blanco */
+}
 /* Estilos para tarjetas en Vuetify */
 .v-card {
   background-color: white;
@@ -44,9 +47,10 @@
   border-radius: 4px;
   padding: 8px;
 }
+
 .v-text-field input:focus {
   border-color: var(--v-primary-base);
-  box-shadow: 0 0 5px rgba(236, 27, 90, 0.5);
+  box-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 /* Estilos para banners */
@@ -58,6 +62,7 @@
   text-align: center;
   padding: 80px 20px;
 }
+
 .banner-content {
   max-width: 800px;
   margin: 0 auto;
@@ -71,6 +76,7 @@
   border-radius: 20px 0 0 20px;
   border: 1px solid #ddd;
 }
+
 form button {
   padding: 8px 12px;
   border-radius: 0 20px 20px 0;
@@ -85,6 +91,7 @@ form button {
     padding: 40px 15px;
   }
 }
+
 @media (max-width: 480px) {
   .banner {
     padding: 30px 10px;
@@ -112,11 +119,13 @@ form button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px;
 }
+
 .product-card img {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
 }
+
 .product-card h2 {
   font-size: 1.2em;
   margin: 10px 0;
@@ -124,24 +133,28 @@ form button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .product-card p {
   font-size: 1em;
   margin: 5px 0;
 }
+
 .product-card button {
-  background-color: #007bff;
+  background-color: #6c9fd3;
   color: white;
   border: none;
-  padding: 20px 20px;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
   margin-top: 10px;
 }
+
 .product-card button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
 .product-card button:hover:not(:disabled) {
   background-color: #0056b3;
 }
@@ -155,10 +168,12 @@ form button {
   padding: 20px;
   border-radius: 8px;
 }
+
 .product-images {
   flex: 1;
   min-width: 300px;
 }
+
 .image-container {
   width: 100%;
   max-width: 500px;
@@ -168,24 +183,31 @@ form button {
   align-items: center;
   margin-bottom: 20px;
 }
+
 .image-container img {
   width: 100%;
   height: auto;
 }
+
 .product-info {
   flex: 1;
   min-width: 300px;
 }
+
 .product-title {
   font-size: 2rem;
   margin-bottom: 20px;
 }
+
 .product-description {
   font-size: 1.2rem;
   margin-bottom: 20px;
 }
+
 .product-price {
   font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* Estilos generales */
@@ -193,15 +215,18 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
 }
+
 nav {
   margin-bottom: 20px;
 }
+
 nav a {
   margin-right: 15px;
   text-decoration: none;
   color: #007bff;
   font-weight: bold;
 }
+
 nav a:hover {
   color: #0056b3;
 }
@@ -213,6 +238,7 @@ nav a:hover {
   align-items: center;
   margin-top: 20px;
 }
+
 .pagination button {
   background-color: #007bff;
   color: white;
@@ -223,13 +249,16 @@ nav a:hover {
   font-size: 1em;
   margin: 0 10px;
 }
+
 .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
 .pagination button:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #b32a00;
 }
+
 .pagination span {
   font-size: 1em;
 }
