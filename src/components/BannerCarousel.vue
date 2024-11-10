@@ -16,34 +16,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { defineProps } from 'vue';
 
-const banners = ref([]);
-
-const fetchBanners = async () => {
-  try {
-    const response = await axios.get('http://localhost:8001/app/banners/');
-    banners.value = response.data.message; // Ajusta según la estructura de tu respuesta
-  } catch (error) {
-    console.error('Error al obtener los banners:', error);
+const props = defineProps({
+  banners: {
+    type: Array,
+    required: true
   }
-};
-
-onMounted(fetchBanners);
+});
 </script>
 
 <style scoped>
 .v-carousel-item {
   background-size: cover;
   background-position: center;
-}
-@media (max-width: 600px) {
-  h2 {
-    font-size: 1.5rem;
-  }
-  p {
-    font-size: 1rem;
-  }
 }
 </style>
