@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="primary" dark>
+  <v-app-bar app color="" light>
     <v-toolbar-title>
       <img :src="logo" alt="E-Commerce Logo" class="logo" />
     </v-toolbar-title>
@@ -36,6 +36,9 @@
       <v-list-item :to="'/catalog'">
         <v-list-item-title>Catálogo</v-list-item-title>
       </v-list-item>
+      <v-list-item :to="'/about'">
+        <v-list-item-title>Sobre Nosotros</v-list-item-title>
+      </v-list-item>
       <v-list-item v-if="isAuthenticated" :to="'/cart'">
         <v-list-item-title>Carrito</v-list-item-title>
       </v-list-item>
@@ -49,11 +52,7 @@
         <v-list-item-title>Admin</v-list-item-title>
       </v-list-item>
       <v-list-item v-if="isAuthenticated" :to="'/profile'">
-        <v-list-item-title>Hola, Logueate! {{ userName }}</v-list-item-title>
-      </v-list-item>
-      <!-- Agregar "Sobre Nosotros" en el menú lateral -->
-      <v-list-item :to="'/about'">
-        <v-list-item-title>Sobre Nosotros</v-list-item-title>
+        <v-list-item-title>Hola, {{ userName }}</v-list-item-title>
       </v-list-item>
       <v-list-item v-if="isAuthenticated" @click="logout">
         <v-list-item-title>Logout</v-list-item-title>
@@ -107,6 +106,7 @@ const logout = () => {
   margin-left: 16px;
   margin-right: 16px;
 }
+
 /* Opcional: Ajustar el espaciado entre los botones en pantallas más grandes */
 @media (max-width: 600px) {
   .mx-3 {

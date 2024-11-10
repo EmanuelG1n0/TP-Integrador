@@ -8,7 +8,7 @@
       <p><strong>Cantidad:</strong> {{ quantity }}</p>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" @click="removeFromCart">Eliminar</v-btn>
+      <v-btn color="white" @click="removeFromCart">Eliminar</v-btn>
     </v-card-actions>
   </v-card>
 </template>

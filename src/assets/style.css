@@ -223,7 +223,7 @@ nav {
 nav a {
   margin-right: 15px;
   text-decoration: none;
-  color: #007bff;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -261,4 +261,29 @@ nav a:hover {
 
 .pagination span {
   font-size: 1em;
+}
+
+< ]
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Alinea el contenido al final del footer */
+  height: 100px; /* Ajusta la altura del footer según sea necesario */
+}
+
+.footer-text {
+  font-size: 12px; /* Ajusta el tamaño de la letra */
+}
+
+.footer-icon {
+  background-color: white; /* Fondo blanco para los íconos */
+  color: var(--v-primary-base); /* Color del ícono */
+  border-radius: 50%; /* Hace que los íconos sean redondos */
+  padding: 10px; /* Ajusta el padding para que los íconos sean más grandes */
+  margin: 5px; /* Espaciado entre los íconos */
+}
+
+.footer-icon:hover {
+  background-color: var(--v-primary-base); /* Cambia el color de fondo al pasar el cursor */
+  color: white; /* Cambia el color del ícono al pasar el cursor */
 }

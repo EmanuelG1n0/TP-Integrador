@@ -14,7 +14,7 @@ const vuetify = createVuetify({
   theme: {
     themes: {
       light: {
-        primary: '#ec1b5a',
+        primary: '#3F51B',
         secondary: '#3483fa',
         accent: '#00a650',
         error: '#f44336',
@@ -25,5 +25,6 @@ const vuetify = createVuetify({
     },
   },
 });
+
 
 export default vuetify;
