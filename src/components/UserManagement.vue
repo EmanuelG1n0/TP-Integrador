@@ -162,9 +162,7 @@ onMounted(fetchUsers);
 
 <style scoped>
 /* Ajustes para hacer la tabla y los botones responsivos */
-.v-data-table {
-  overflow-x: auto;
-}
+
 
 @media (max-width: 600px) {
   .v-data-table {

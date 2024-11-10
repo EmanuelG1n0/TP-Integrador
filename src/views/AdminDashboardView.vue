@@ -6,7 +6,8 @@
         app
         v-model="drawer"
         :permanent="isDesktop"
-        :temporary="!isDesktop"
+        temporary
+        width="240"
         class="app-drawer"
       >
         <v-list>
@@ -38,12 +39,12 @@
       </v-navigation-drawer>
 
       <v-app-bar app color="primary">
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>Panel de Administración</v-toolbar-title>
       </v-app-bar>
 
-      <v-main :style="{ marginLeft: isDesktop ? '240px' : '0', marginTop: '64px' }">
-        <v-container fluid>
+      <v-main class="main-content">
+        <v-container class="center-content" fluid>
           <component :is="currentViewComponent" />
         </v-container>
       </v-main>
@@ -71,8 +72,8 @@ import RoleManagement from '@/components/RoleManagement.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
-const drawer = ref(false);
 const currentView = ref('ProductManagement');
+const drawer = ref(false);
 
 // Computed property para cargar el componente correspondiente
 const currentViewComponent = computed(() => {
@@ -87,9 +88,6 @@ const currentViewComponent = computed(() => {
       return ProductManagement;
   }
 });
-
-// Verifica si es una pantalla de escritorio o móvil
-const isDesktop = computed(() => window.innerWidth >= 1024);
 
 // Estado para verificar si el usuario es administrador
 const isAdmin = ref(false);
@@ -109,65 +107,21 @@ onMounted(async () => {
     router.push('/home');
   }
 });
+
+// Computed para verificar si es una pantalla de escritorio
+const isDesktop = computed(() => window.innerWidth >= 1024);
 </script>
 
 <style scoped>
-/* Estilos para el panel de administración */
-.admin-panel {
-  display: flex;
-  flex-direction: column;
-}
+/* Ajuste de margen para la barra lateral en escritorio */
 
-.app-drawer {
-  z-index: 100;
-}
 
-/* Estilos para el contenido del gestor */
-.content-panel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-}
 
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 1023px) {
-  .v-navigation-drawer {
-    width: 100%;
-    max-width: 300px;
-  }
 
-  .v-app-bar {
-    background-color: #6200ea;
-  }
-
-  .v-app-bar-nav-icon {
-    color: white;
-  }
-
-  .v-main {
-    padding: 0 16px;
-  }
-
-  .v-container {
-    padding: 16px;
-  }
-}
-
-/* Ajustes para pantallas grandes */
-@media (min-width: 1024px) {
-  .v-navigation-drawer {
-    position: fixed;
-    width: 240px;
-  }
-
-  .v-app-bar {
-    background-color: #6200ea;
-  }
-
-  .v-main {
-    margin-left: 240px;
-    transition: margin-left 0.3s ease;
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
   }
 }
 </style>

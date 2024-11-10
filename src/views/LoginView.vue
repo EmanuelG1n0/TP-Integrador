@@ -1,5 +1,5 @@
 <template>
-  <v-container class="login-container" max-width="400px">
+  <div>
     <h2>Iniciar Sesión</h2>
     <v-form @submit.prevent="submitLogin">
       <v-text-field
@@ -7,26 +7,17 @@
         v-model="mail"
         type="email"
         required
-        outlined
-        dense
-        class="mb-4"
       ></v-text-field>
       <v-text-field
         label="Contraseña"
         v-model="pass"
         type="password"
         required
-        outlined
-        dense
-        class="mb-4"
       ></v-text-field>
-      <v-btn color="primary" type="submit" block large>Ingresar</v-btn>
+      <v-btn color="primary" type="submit">Ingresar</v-btn>
     </v-form>
-    <v-divider class="my-4"></v-divider>
-    <p class="register-link">
-      ¿No tienes una cuenta? <v-btn text to="/register" color="primary">Regístrate aquí</v-btn>
-    </p>
-  </v-container>
+    <p class="mt-3">¿No tienes una cuenta? <a href="/register">Regístrate aquí</a></p>
+  </div>
 </template>
 
 <script setup>

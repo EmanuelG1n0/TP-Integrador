@@ -7,8 +7,8 @@
       <p><strong>Precio:</strong> ${{ product.price }}</p>
     </v-card-text>
     <v-card-actions class="d-flex justify-center">
-      <v-btn @click="handleAddToCart">Agregar al Carrito</v-btn>
-      <v-btn   @click="viewDetails">Ver Detalles</v-btn>
+      <v-btn @click="handleAddToCart" class="responsive-btn">Agregar al Carrito</v-btn>
+      <v-btn @click="viewDetails" class="responsive-btn">Ver Detalles</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -57,27 +57,28 @@ const viewDetails = () => {
 
 .v-card-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Siempre los botones en columna */
   gap: 10px;
   align-items: center;
 }
+
 .v-btn {
- color: antiquewhite;
+  color: antiquewhite;
 }
 
+/* Responsive ajustes */
 @media (max-width: 600px) {
   .product-card {
     max-width: 100%;
   }
 
   .product-image {
-    height: 150px; /* Reduce the height of the image on smaller screens */
+    height: 150px; /* Reduce la altura de la imagen en pantallas pequeñas */
   }
 
-  .v-card-actions {
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
+  .responsive-btn {
+    min-width: 120px; /* Evita que los botones se encojan demasiado */
+    font-size: 0.9rem; /* Ajuste de tamaño de fuente para pantallas pequeñas */
   }
 }
 </style>
