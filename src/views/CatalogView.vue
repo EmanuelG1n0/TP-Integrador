@@ -26,7 +26,7 @@ import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
 const userId = authStore.userId;
-let cartId = authStore.cartId;
+let cartId = authStore.cartId; // Cambiado a let para permitir la reasignación
 const products = ref([]);
 const router = useRouter();
 
@@ -61,7 +61,7 @@ const addToCart = async (product) => {
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:8001/app/products/');
-    products.value = response.data.message; 
+    products.value = response.data.message; // Accede a message en lugar de data directamente
   } catch (error) {
     console.error('Error al obtener los productos:', error);
     alert('Error al obtener los productos.');

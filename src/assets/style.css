@@ -3,34 +3,38 @@
 
 /* Variables de colores y estilos para Vuetify */
 :root {
-  --v-primary-base: #ec1b5a;
-  --v-secondary-base: #3483fa;
-  --v-accent-base: #00a650;
-  --v-error-base: #f44336;
-  --v-warning-base: #ffeb3b;
-  --v-info-base: #2196f3;
-  --v-success-base: #4caf50;
+  --v-primary-base: #4a90e2; /* Azul */
+  --v-secondary-base: #50e3c2; /* Verde menta */
+  --v-accent-base: #f5a623; /* Naranja */
+  --v-error-base: #d0021b; /* Rojo */
+  --v-warning-base: #f8e71c; /* Amarillo */
+  --v-info-base: #9013fe; /* Púrpura */
+  --v-success-base: #d321bb; /* Verde */
 }
-
 /* Estilos globales para Vuetify */
 .v-application {
   font-family: 'Poppins', sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   background-color: #f5f5f5;
   color: #333333;
 }
 
-/* Estilos para botones en Vuetify */
 .v-btn {
   background-color: var(--v-primary-base);
-  color: white;
+  color: white; /* Asegúrate de que el color del texto sea blanco */
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
 .v-btn:hover {
-  background-color: hsl(340, 100%, 50%);
+  background-color: hsl(210, 100%, 50%);
 }
 
+/* Estilos específicos para botones en el carrito */
+.cart-btn {
+  color: white !important; /* Fuerza el color del texto a blanco */
+}
 /* Estilos para tarjetas en Vuetify */
 .v-card {
   background-color: white;
@@ -48,7 +52,7 @@
 
 .v-text-field input:focus {
   border-color: var(--v-primary-base);
-  box-shadow: 0 0 5px rgba(236, 27, 90, 0.5);
+  box-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 /* Estilos para banners */
@@ -138,7 +142,7 @@ form button {
 }
 
 .product-card button {
-  background-color: #007bff;
+  background-color: #6c9fd3;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -221,7 +225,7 @@ nav {
 nav a {
   margin-right: 15px;
   text-decoration: none;
-  color: #007bff;
+  color: #ffffff;
   font-weight: bold;
 }
 
@@ -254,9 +258,33 @@ nav a:hover {
 }
 
 .pagination button:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #b32a00;
 }
 
 .pagination span {
   font-size: 1em;
+}
+
+.footer {
+  display: flex;
+  justify-content: center; /* Alinea el contenido al centro del footer */
+  justify-content: flex-end; /* Alinea el contenido al final del footer */
+  height: auto; /* Ajusta la altura del footer según sea necesario */
+}
+
+.footer-text {
+  font-size: 12px; /* Ajusta el tamaño de la letra */
+}
+
+.footer-icon {
+  background-color: white; /* Fondo blanco para los íconos */
+  color: var(--v-primary-base); /* Color del ícono */
+  border-radius: 50%; /* Hace que los íconos sean redondos */
+  padding: 10px; /* Ajusta el padding para que los íconos sean más grandes */
+  margin: 5px; /* Espaciado entre los íconos */
+}
+
+.footer-icon:hover {
+  background-color: var(--v-primary-base); /* Cambia el color de fondo al pasar el cursor */
+  color: white; /* Cambia el color del ícono al pasar el cursor */
 }

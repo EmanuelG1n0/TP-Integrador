@@ -1,16 +1,8 @@
 <template>
   <v-app>
-    <!-- Panel de administración -->
-    <div v-if="isAdmin" class="admin-panel">
-      <v-navigation-drawer
-        app
-        v-model="drawer"
-        :permanent="isDesktop"
-        temporary
-        width="240"
-        class="app-drawer"
-      >
-        <v-list>
+    <v-navigation-drawer app v-model="drawer" permanent>
+      <v-list>
+        <v-list-item-group>
           <v-list-item @click="currentView = 'ProductManagement'">
             <v-list-item-icon>
               <v-icon>mdi-plus-box</v-icon>
@@ -35,30 +27,18 @@
               <v-list-item-title>Ver Usuarios</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
-
-      <v-app-bar app color="primary">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>Panel de Administración</v-toolbar-title>
-      </v-app-bar>
-
-      <v-main class="main-content">
-        <v-container class="center-content" fluid>
-          <component :is="currentViewComponent" />
-        </v-container>
-      </v-main>
-    </div>
-
-    <!-- Gestor -->
-    <div v-else class="content-panel">
-      <v-main>
-        <v-container fluid>
-          <h1>Gestor de Productos</h1>
-          <!-- Aquí puedes agregar el contenido específico del gestor -->
-        </v-container>
-      </v-main>
-    </div>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+    <v-app-bar app>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Panel de Administración</v-toolbar-title>
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <component :is="currentViewComponent" />
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -72,10 +52,9 @@ import RoleManagement from '@/components/RoleManagement.vue';
 
 const router = useRouter();
 const authStore = useAuthStore();
+const drawer = ref(true);
 const currentView = ref('ProductManagement');
-const drawer = ref(false);
 
-// Computed property para cargar el componente correspondiente
 const currentViewComponent = computed(() => {
   switch (currentView.value) {
     case 'ProductManagement':
@@ -89,18 +68,13 @@ const currentViewComponent = computed(() => {
   }
 });
 
-// Estado para verificar si el usuario es administrador
-const isAdmin = ref(false);
-
 // Verificación de permisos y autenticación
 onMounted(async () => {
   try {
-    await authStore.fetchUser();
+    await authStore.fetchUser(); // Asegúrate de que esta función exista y cargue la información del usuario
     if (!authStore.isAdminGetter) {
       alert('No tienes permisos para acceder al panel de administración.');
       router.push('/home');
-    } else {
-      isAdmin.value = true;
     }
   } catch (error) {
     console.error('Error al verificar permisos de administrador:', error);

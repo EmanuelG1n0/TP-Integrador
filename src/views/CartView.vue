@@ -2,10 +2,13 @@
   <div>
     <h1>Carrito de Compras</h1>
     <div v-if="cartItems.length">
-      <v-row dense justify="center">
-        <v-col v-for="item in cartItems" :key="item.id" :cols="2.8" class="mb-4 d-flex justify-center">
-          <CartItem :product="item.Product" :quantity="item.quantity" :cartId="cartId"
-            @remove-from-cart="removeFromCart" class="cart-item" />
+      <v-row>
+        <v-col
+          cols="4"
+          v-for="item in cartItems"
+          :key="item.id"
+        >
+          <CartItem :product="item.Product" :quantity="item.quantity" :cartId="cartId" @remove-from-cart="removeFromCart" />
         </v-col>
       </v-row>
       <!-- Botón "Realizar Orden" alineado a la derecha -->

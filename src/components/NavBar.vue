@@ -1,6 +1,8 @@
 <template>
-  <v-app-bar app color="primary" dark>
-    <v-toolbar-title>E-Commerce</v-toolbar-title>
+  <v-app-bar app color="" light>
+    <v-toolbar-title>
+      <img :src="logo" alt="E-Commerce Logo" class="logo" />
+    </v-toolbar-title>
     <v-spacer></v-spacer>
 
     <!-- Botón de Menú solo en dispositivos móviles -->
@@ -34,6 +36,9 @@
       <v-list-item :to="'/catalog'">
         <v-list-item-title>Catálogo</v-list-item-title>
       </v-list-item>
+      <v-list-item :to="'/about'">
+        <v-list-item-title>Sobre Nosotros</v-list-item-title>
+      </v-list-item>
       <v-list-item v-if="isAuthenticated" :to="'/cart'">
         <v-list-item-title>Carrito</v-list-item-title>
       </v-list-item>
@@ -46,15 +51,11 @@
       <v-list-item v-if="isAdmin" :to="'/admin'">
         <v-list-item-title>Admin</v-list-item-title>
       </v-list-item>
-      <v-list-item v-if="isAuthenticated" @click="logout">
-        <v-list-item-title>Logout</v-list-item-title>
-      </v-list-item>
       <v-list-item v-if="isAuthenticated" :to="'/profile'">
         <v-list-item-title>Hola, {{ userName }}</v-list-item-title>
       </v-list-item>
-      <!-- Agregar "Sobre Nosotros" en el menú lateral -->
-      <v-list-item :to="'/about'">
-        <v-list-item-title>Sobre Nosotros</v-list-item-title>
+      <v-list-item v-if="isAuthenticated" @click="logout">
+        <v-list-item-title>Logout</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -65,6 +66,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import { useRouter } from 'vue-router';
 import { useDisplay } from 'vuetify';
+import logo from '@/assets/logo.png';
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -94,6 +96,11 @@ const logout = () => {
 </script>
 
 <style scoped>
+.logo {
+  height: 80px; /* Ajusta la altura del logo */
+  width: auto; /* Mantiene la proporción del logo */
+  margin-right: 10px;
+}
 .mx-3 {
   padding: 20px;
   margin-left: 16px;

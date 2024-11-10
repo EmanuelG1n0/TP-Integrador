@@ -8,7 +8,7 @@
       <p><strong>Cantidad:</strong> {{ quantity }}</p>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="red" @click="removeFromCart">Eliminar</v-btn>
+      <v-btn color="white" @click="removeFromCart">Eliminar</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -41,6 +41,6 @@ const removeFromCart = () => {
   width: 100%;
   height: auto;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 </style>

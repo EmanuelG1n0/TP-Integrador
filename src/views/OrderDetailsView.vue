@@ -1,42 +1,62 @@
 <template>
-  <div class="orders-container">
-    <h2 class="title">Mis Órdenes</h2>
-
-    <!-- Indicador de carga mientras se obtienen las órdenes -->
-    <v-progress-circular
-      v-if="loading"
-      indeterminate
-      color="primary"
-      size="64"
-      class="mx-auto"
-    ></v-progress-circular>
-
-    <div v-else>
-      <!-- Si no hay órdenes, mostrar mensaje -->
-      <div v-if="orders.length === 0" class="no-orders">
-        <v-alert type="info" class="my-3">
-          No tienes órdenes.
-        </v-alert>
-      </div>
-
-      <!-- Mostrar las órdenes si existen -->
-      <v-row v-else class="orders-list">
+  <div>
+    <h2>Mis Órdenes</h2>
+    <div v-if="orders.length">
+      <v-row>
         <v-col
           v-for="order in orders"
           :key="order.id"
           cols="12"
-          md="8"
-          class="order-item"
+          md="6"
         >
-          <OrderCard :order="order" />
+          <v-card @click="openOrderDialog(order)">
+            <v-card-title>Orden ID: {{ order.id }}</v-card-title>
+            <v-card-subtitle>Estado: {{ order.status }}</v-card-subtitle>
+            <v-card-text>
+              <p><strong>Precio Total:</strong> ${{ order.totalprice }}</p>
+              <p><strong>Fecha de Creación:</strong> {{ new Date(order.createdAt).toLocaleString() }}</p>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </div>
+    <div v-else>
+      <p>No tienes órdenes.</p>
+    </div>
+
+    <!-- Dialogo para mostrar detalles de la orden -->
+    <v-dialog v-model="dialog" max-width="600px">
+      <v-card>
+        <v-card-title>Orden ID: {{ selectedOrder.id }}</v-card-title>
+        <v-card-subtitle>Estado: {{ selectedOrder.status }}</v-card-subtitle>
+        <v-card-text>
+          <p><strong>Dirección de Entrega:</strong> {{ selectedOrder.delivery_address }}</p>
+          <p><strong>Ciudad:</strong> {{ selectedOrder.city }}</p>
+          <p><strong>Estado:</strong> {{ selectedOrder.state }}</p>
+          <p><strong>Envío:</strong> ${{ selectedOrder.shipping }}</p>
+          <p><strong>Precio Total:</strong> ${{ selectedOrder.totalprice }}</p>
+          <p><strong>Fecha de Creación:</strong> {{ new Date(selectedOrder.createdAt).toLocaleString() }}</p>
+          <p><strong>Última Actualización:</strong> {{ new Date(selectedOrder.updatedAt).toLocaleString() }}</p>
+          <div>
+            <strong>Productos:</strong>
+            <ul>
+              <li v-for="product in parsedProducts" :key="product.ProductId">
+                Nombre de Producto: {{ productNames[product.ProductId] || 'Cargando...' }}, Cantidad: {{ product.quantity }}, Precio: ${{ product.price }}
+              </li>
+            </ul>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="dialog = false">Cerrar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
 import OrderCard from '@/components/OrderCard.vue';
@@ -44,24 +64,45 @@ import OrderCard from '@/components/OrderCard.vue';
 const authStore = useAuthStore();
 const userId = ref(authStore.userId);
 const orders = ref([]);
-const loading = ref(true);  // Estado para manejar la carga
+const dialog = ref(false);
+const selectedOrder = ref({});
+const productNames = ref({});
 
-// Función para obtener las órdenes
 const fetchOrders = async () => {
-  loading.value = true;  // Iniciar el estado de carga
-
   try {
     const response = await axios.get(`http://localhost:8001/app/orders/user/${userId.value}`);
     orders.value = response.data.orders;
   } catch (error) {
     console.error('Error al obtener las órdenes:', error);
     alert('Error al obtener las órdenes.');
-  } finally {
-    loading.value = false;  // Terminar el estado de carga
   }
 };
 
-// Manejo del ciclo de vida: obtener órdenes después de montar el componente
+const openOrderDialog = async (order) => {
+  selectedOrder.value = order;
+  await fetchProductNames();
+  dialog.value = true;
+};
+
+const parsedProducts = computed(() => JSON.parse(selectedOrder.value.products));
+
+const fetchProductName = async (productId) => {
+  if (!productNames.value[productId]) {
+    try {
+      const response = await axios.get(`http://localhost:8001/app/products/${productId}`);
+      productNames.value[productId] = response.data.message.name;
+    } catch (error) {
+      console.error(`Error al obtener el nombre del producto con ID ${productId}:`, error);
+    }
+  }
+};
+
+const fetchProductNames = async () => {
+  for (const product of parsedProducts.value) {
+    await fetchProductName(product.ProductId);
+  }
+};
+
 onMounted(() => {
   if (userId.value) {
     fetchOrders();
@@ -80,42 +121,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.orders-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* Esto asegura que el contenido esté centrado verticalmente */
-  padding: 20px;
-  background: #f5f5f5;
-  border-radius: 8px;
-}
-
-.title {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.no-orders {
-  text-align: center;
-}
-
-.orders-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;  /* Espaciado entre las órdenes */
-  width: 100%;
-}
-
-.order-item {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.my-3 {
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
+/* Tus estilos aquí */
 </style>
