@@ -54,11 +54,41 @@ const removeFromCart = async (productId) => {
   }
 };
 
+const addToCart = async (product) => {
+  if (product.stock <= 0) {
+    alert('No puedes agregar productos con stock negativo o cero.');
+    return;
+  }
+
+  try {
+    await getCartId();
+    const responseCartItems = await axios.get(`http://localhost:8001/app/carts/${cartId.value}`);
+    const cartItems = responseCartItems.data.message.CartItems;
+    const cartItem = cartItems.find(item => item.ProductId === product.id);
+    const currentQuantity = cartItem ? cartItem.quantity : 0;
+
+    if (currentQuantity + 1 > product.stock) {
+      alert('No puedes agregar más productos de los que hay en stock.');
+      return;
+    }
+
+    await axios.post('http://localhost:8001/app/carts/add', {
+      cartId: cartId.value,
+      productId: product.id,
+      quantity: 1,
+    });
+    alert('Producto agregado al carrito con éxito');
+  } catch (error) {
+    console.error('Error al agregar el producto al carrito:', error);
+    alert('Error al agregar el producto al carrito.');
+  }
+};
+
 const generateOrder = async () => {
   try {
     const response = await axios.post(`http://localhost:8001/app/carts/${userId.value}/generate-order`);
     alert('Orden generada con éxito');
-    await getCartItems(); // Recargar los ítems del carrito después de generar la orden
+    await getCartItems();
   } catch (error) {
     console.error('Error al generar la orden:', error);
     alert('Error al generar la orden.');
