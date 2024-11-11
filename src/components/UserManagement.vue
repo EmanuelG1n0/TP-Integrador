@@ -34,8 +34,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="closeDialog">Cancelar</v-btn>
-            <v-btn color="blue darken-1" text @click="saveUser">{{ isEditing ? 'Guardar' : 'Agregar' }}</v-btn>
+            <v-btn color="blue darken-1" text class="boton" @click="closeDialog">Cancelar</v-btn>
+            <v-btn color="blue darken-1" text class="boton" @click="saveUser">{{ isEditing ? 'Guardar' : 'Agregar' }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -152,5 +152,8 @@
   </script>
   
   <style scoped>
-  /* Tus estilos aquí */
-  </style>
+.boton{
+  color: white !important; 
+  font-weight: bold; 
+}  
+</style>

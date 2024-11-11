@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="profile-container">
     <h2>Perfil de Usuario</h2>
-    <ProfileCard :user="user" @update="handleUpdate" />
+    <ProfileCard :user="user" @update="handleUpdate" class="profile-card"/>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ const fetchUserDetails = async (userId) => {
     const response = await axios.get(`http://localhost:8001/app/users/${userId}`);
     const userData = response.data;
     if (userData.dateOfBirth) {
-      userData.dateOfBirth = new Date(userData.dateOfBirth).toISOString().split('T')[0];
+      userData.dateOfBirth = new Date(userData.dateOfBirth).toISOString().split('T')[0]; // Formato de fecha
     }
     user.value = userData;
   } catch (error) {
@@ -32,7 +32,7 @@ const fetchUserDetails = async (userId) => {
 
 onMounted(() => {
   if (!authStore.isAuthenticated) {
-    router.push('/login');
+    router.push('/login'); 
   } else {
     const userId = authStore.userId;
     if (userId) {
@@ -46,10 +46,55 @@ onMounted(() => {
 
 const handleUpdate = (updatedUser) => {
   user.value = updatedUser;
-  authStore.setUser(updatedUser); // Actualizar el estado de autenticación con los datos actualizados del usuario
+  authStore.setUser(updatedUser); 
 };
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-card div {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.profile-card button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-card button:hover {
+  background-color: #45a049;
+}
 </style>

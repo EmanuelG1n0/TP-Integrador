@@ -7,9 +7,9 @@
       <p><strong>Precio:</strong> ${{ product.price }}</p>
       <p><strong>Stock:</strong> {{ product.stock }}</p>
     </v-card-text>
-    <v-card-actions>
+    <v-card-actions class="action-buttons">
       <v-btn :disabled="product.stock === 0" color="white" @click="handleAddToCart">Agregar al Carrito</v-btn>
-      <v-btn color="white" @click="viewDetails">Ver Detalles</v-btn>
+      <v-btn color="white" @click="viewDetails" class="detalle">Ver Detalles</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -36,5 +36,18 @@ const viewDetails = () => {
 .product-image {
   width: 100%;
   height: auto;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.v-btn {
+  width: 100%;
+}
+.detalle{
+  width: 80%;
 }
 </style>

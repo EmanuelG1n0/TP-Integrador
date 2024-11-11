@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h2>Mis Órdenes</h2>
+    <h2 class="orders-title">Mis Órdenes</h2>
+
     <div v-if="orders.length">
       <v-row>
         <v-col
@@ -9,9 +10,9 @@
           cols="12"
           md="6"
         >
-          <v-card @click="openOrderDialog(order)">
-            <v-card-title>Orden ID: {{ order.id }}</v-card-title>
-            <v-card-subtitle>Estado: {{ order.status }}</v-card-subtitle>
+          <v-card @click="openOrderDialog(order)" class="order-card">
+            <v-card-title class="order-card-title">Orden ID: {{ order.id }}</v-card-title>
+            <v-card-subtitle class="order-card-subtitle">Estado: {{ order.status }}</v-card-subtitle>
             <v-card-text>
               <p><strong>Precio Total:</strong> ${{ order.totalprice }}</p>
               <p><strong>Fecha de Creación:</strong> {{ new Date(order.createdAt).toLocaleString() }}</p>
@@ -20,15 +21,16 @@
         </v-col>
       </v-row>
     </div>
+
     <div v-else>
       <p>No tienes órdenes.</p>
     </div>
 
     <!-- Dialogo para mostrar detalles de la orden -->
     <v-dialog v-model="dialog" max-width="600px">
-      <v-card>
-        <v-card-title>Orden ID: {{ selectedOrder.id }}</v-card-title>
-        <v-card-subtitle>Estado: {{ selectedOrder.status }}</v-card-subtitle>
+      <v-card class="order-dialog">
+        <v-card-title class="order-card-title">Orden ID: {{ selectedOrder.id }}</v-card-title>
+        <v-card-subtitle class="order-card-subtitle">Estado: {{ selectedOrder.status }}</v-card-subtitle>
         <v-card-text>
           <p><strong>Dirección de Entrega:</strong> {{ selectedOrder.delivery_address }}</p>
           <p><strong>Ciudad:</strong> {{ selectedOrder.city }}</p>
@@ -39,11 +41,16 @@
           <p><strong>Última Actualización:</strong> {{ new Date(selectedOrder.updatedAt).toLocaleString() }}</p>
           <div>
             <strong>Productos:</strong>
-            <ul>
-              <li v-for="product in parsedProducts" :key="product.ProductId">
-                Nombre de Producto: {{ productNames[product.ProductId] || 'Cargando...' }}, Cantidad: {{ product.quantity }}, Precio: ${{ product.price }}
-              </li>
-            </ul>
+            <v-list dense>
+              <v-list-item-group v-for="product in parsedProducts" :key="product.ProductId">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ productNames[product.ProductId] || 'Cargando...' }}</v-list-item-title>
+                    <v-list-item-subtitle>Cantidad: {{ product.quantity }} | Precio: ${{ product.price }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
           </div>
         </v-card-text>
         <v-card-actions>
@@ -56,10 +63,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
-import OrderCard from '@/components/OrderCard.vue';
 
 const authStore = useAuthStore();
 const userId = ref(authStore.userId);
@@ -106,20 +112,83 @@ const fetchProductNames = async () => {
 onMounted(() => {
   if (userId.value) {
     fetchOrders();
-  } else {
-    watch(
-      () => authStore.userId,
-      (newUserId) => {
-        if (newUserId) {
-          userId.value = newUserId;
-          fetchOrders();
-        }
-      }
-    );
   }
 });
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+.orders-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.order-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.order-card:hover {
+  transform: scale(1.05);
+}
+
+.order-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.order-card-subtitle {
+  font-size: 1rem;
+  color: #888;
+  text-align: center;
+}
+
+.order-card-text p {
+  margin-bottom: 10px;
+}
+
+.order-dialog {
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.order-dialog .order-card-title {
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.order-dialog .order-card-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #888;
+}
+
+.boton {
+  font-weight: bold;
+  color: white !important;
+}
+
+@media (max-width: 600px) {
+  .order-card {
+    margin-bottom: 15px;
+  }
+
+  .order-card-title {
+    font-size: 1rem;
+  }
+
+  .order-card-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .order-dialog .order-card-title {
+    font-size: 1.2rem;
+  }
+}
 </style>

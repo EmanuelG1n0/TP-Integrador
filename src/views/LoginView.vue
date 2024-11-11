@@ -1,38 +1,13 @@
 <template>
-<<<<<<< HEAD
-  <div class="login-container">
-    <h2>Iniciar Sesión</h2>
-    <v-form @submit.prevent="submitLogin" class="login-form">
-      <v-text-field
-        label="Email"
-        v-model="mail"
-        type="email"
-        required
-        outlined
-        dense
-        hide-details
-        color="primary"
-      ></v-text-field>
-      <v-text-field
-        label="Contraseña"
-        v-model="pass"
-        type="password"
-        required
-        outlined
-        dense
-        hide-details
-        color="primary"
-      ></v-text-field>
-      <v-btn color="primary" type="submit" class="login-button" elevation="2">Ingresar</v-btn>
-    </v-form>
-    <p class="register-text">
-      ¿No tienes una cuenta? <a href="/register" class="register-link">Regístrate aquí</a>
-    </p>
-  </div>
-=======
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-col cols="12" md="6">
+      <v-col cols="12" md="6" class="d-flex flex-column align-center justify-center">
+        <!-- Mensaje centrado -->
+        <div class="login-message text-center">
+          <h2>Ingresá tu e-mail para iniciar sesión</h2>
+        </div>
+
+        <!-- Card de Login -->
         <v-card class="login-card">
           <v-card-title class="text-center">Iniciar Sesión</v-card-title>
           <v-card-text>
@@ -59,19 +34,14 @@
             </v-form>
             <v-divider class="my-4"></v-divider>
             <p class="register-link">
-              ¿No tienes una cuenta? <v-btn text to="/register" color="primary">Regístrate aquí</v-btn>
+              ¿No tienes una cuenta? 
+              <v-btn text to="/register" color="primary">Regístrate aquí</v-btn>
             </p>
           </v-card-text>
         </v-card>
       </v-col>
-      <v-col cols="12" md="6" class="d-none d-md-flex align-center justify-center">
-        <div class="login-message">
-          <h2>Ingresá tu e-mail para iniciar sesión</h2>
-        </div>
-      </v-col>
     </v-row>
   </v-container>
->>>>>>> origin/szavala
 </template>
 
 <script setup>
@@ -85,6 +55,7 @@ const pass = ref('');
 const router = useRouter();
 const authStore = useAuthStore();
 
+// Función para enviar los datos de inicio de sesión
 const submitLogin = async () => {
   try {
     const response = await axios.post('http://localhost:8001/app/users/login', {
@@ -95,6 +66,7 @@ const submitLogin = async () => {
     localStorage.setItem('authToken', token);
     await authStore.login(token);
 
+    // Redirigir al administrador o a la página principal
     if (authStore.isAdminGetter) {
       router.push('/admin');
     } else {
@@ -110,28 +82,39 @@ const submitLogin = async () => {
 </script>
 
 <style scoped>
-.login-container {
-  padding: 40px 30px;
-  margin-top: 100px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Estilos para la vista de login */
+.login-card {
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  text-align: center;
+  width: 100%;  /* Asegura que ocupe todo el ancho disponible */
 }
 
 h2 {
   color: #333;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .register-link {
   font-size: 0.9em;
+  text-align: center;
+}
+
+.login-message h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 600px) {
-  .login-container {
-    margin-top: 50px;
+  /* Estilos responsivos para pantallas pequeñas */
+  .login-card {
     padding: 20px;
+  }
+
+  .login-message h2 {
+    font-size: 1.5rem;
   }
 }
 </style>
