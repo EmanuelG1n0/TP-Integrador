@@ -29,7 +29,7 @@
           Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los siguientes pasos:
         </p>
         <ol>
-          <li>Haz un fork del proyecto.</li>
+          <li>Haz un fork del proyecto y suma tus ideas a nuestro proyecto.</li>
           <li>Crea una nueva rama (<code>git checkout -b feature/nueva-funcionalidad</code>).</li>
           <li>Realiza tus cambios y haz commit (<code>git commit -am 'Agrega nueva funcionalidad'</code>).</li>
           <li>Haz push a la rama (<code>git push origin feature/nueva-funcionalidad</code>).</li>
