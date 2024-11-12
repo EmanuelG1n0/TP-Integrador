@@ -21,7 +21,7 @@
           <li><strong>Vue 3:</strong> Un framework progresivo de JavaScript para construir interfaces de usuario.</li>
           <li><strong>Vuetify:</strong> Un framework de componentes de Material Design para Vue.js.</li>
           <li><strong>Vite:</strong> Un build tool rápido y moderno para proyectos de Vue.js.</li>
-          <li><strong>Pinia:</strong> Un store de estado para Vue.js.</li>
+          <li><strong>Pinia:</strong> Un store de estado para Vue.js, útil en aplicaciones donde diferentes componentes necesitan compartir datos y sincronizarse.</li>
           <li><strong>Axios:</strong> Una librería para hacer solicitudes HTTP.</li>
         </ul>
         <h3>Contribuciones</h3>
