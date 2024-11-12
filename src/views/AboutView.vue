@@ -18,8 +18,8 @@
         </ul>
         <h3>Tecnologías Utilizadas</h3>
         <ul>
-          <li><strong>Vue 3:</strong> Un framework progresivo de JavaScript para construir interfaces de usuario. Progresivo porque puedes usar Vue para mejorar partes específicas de una aplicación (sin necesidad de reemplazar completamente el frontend)</li>
-          <li><strong>Vuetify:</strong> Un framework de componentes de Material Design para Vue.js.</li>
+          <li><strong>Vue 3:</strong> Un framework progresivo de JavaScript para construir interfaces de usuario. Progresivo porque puedes usar Vue para mejorar partes específicas de una aplicación (sin necesidad de reemplazar completamente el frontend).</li>
+          <li><strong>Vuetify:</strong> Un framework de componentes de Material Design para Vue.js. Es una librería de componentes de UI que sigue los principios de diseño de Material Design de Google. Ofrece una gran variedad de componentes predefinidos y personalizables (como botones, tarjetas, formularios, entre otros), facilitando la construcción de aplicaciones con una apariencia moderna y profesional.</li>
           <li><strong>Vite:</strong> Un build tool moderno para proyectos de Vue.js, rápido gracias a que carga solo los módulos necesarios durante el desarrollo.</li>
           <li><strong>Pinia:</strong> Un store de estado para Vue.js, útil en aplicaciones donde diferentes componentes necesitan compartir datos y sincronizarse.</li>
           <li><strong>Axios:</strong> Una librería para hacer solicitudes HTTP, que te permite interactuar con APIs externas.</li>
