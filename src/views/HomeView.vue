@@ -1,26 +1,25 @@
 <template>
   <div>
     <h1>Bienvenido a nuestro E-Commerce</h1>
-    <BannerCarousel :banners="banners" />
-    <!-- Contenido adicional -->
-    <div>
-    <h2>Catálogo de Productos</h2>
-    <v-row>
-      <v-col
-        cols="4"
-        v-for="product in products"
-        :key="product.id"
-      >
-        <ProductCard
-          :product="product"
-          @add-to-cart="addToCart"
-        />
-      </v-col>
-    </v-row>
-  </div>
+    <!-- Mostrar productos del catálogo -->
     <v-container class="mt-5">
+      <h2>Nuestros Productos</h2>
       <v-row>
-        <!-- Métodos de Pago -->
+        <v-col
+          cols="4"
+          v-for="product in products"
+          :key="product.id"
+        >
+          <ProductCard
+            :product="product"
+            @add-to-cart="addToCart"
+          />
+        </v-col>
+      </v-row>
+      <!-- Divisor -->
+      <v-divider class="my-5"></v-divider>
+      <!-- Métodos de Pago -->
+      <v-row>
         <v-col cols="12" md="6" class="text-center">
           <h3>Métodos de Pago</h3>
           <div class="payment-icons">
@@ -62,8 +61,6 @@ import { useRouter } from 'vue-router';
 import ProductCard from '@/components/ProductCard.vue';
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
-
-
 
 const authStore = useAuthStore();
 const userId = authStore.userId;
@@ -110,7 +107,6 @@ onMounted(async () => {
 });
 
 const email = ref('');
-
 
 const subscribeToNewsletter = async () => {
   try {
