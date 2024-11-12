@@ -37,7 +37,7 @@
         </ol>
         <h3>Licencia</h3>
         <p>
-          Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo <code>LICENSE</code> para obtener más información.
+          Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo <code>LICENSE</code> para obtener más información en nuestra app.
         </p>
       </v-card-text>
     </v-card>
