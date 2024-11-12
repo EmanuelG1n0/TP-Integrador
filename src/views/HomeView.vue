@@ -84,6 +84,19 @@ const addToCart = async (product) => {
 
   try {
     await getCartId();
+
+    // Obtener la cantidad actual en el carrito
+    const responseCartItems = await axios.get(`http://localhost:8001/app/carts/${cartId}`);
+    const cartItems = responseCartItems.data.message.CartItems || [];
+    const cartItem = cartItems.find(item => item.ProductId === product.id);
+    const currentQuantity = cartItem ? cartItem.quantity : 0;
+
+    // Verificar si la cantidad total no excede el stock disponible
+    if (currentQuantity + 1 > product.stock) {
+      alert('No puedes agregar más productos de los que hay en stock.');
+      return;
+    }
+
     await axios.post('http://localhost:8001/app/carts/add', {
       cartId: cartId,
       productId: product.id,
