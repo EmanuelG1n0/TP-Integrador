@@ -18,26 +18,26 @@
         </ul>
         <h3>Tecnologías Utilizadas</h3>
         <ul>
-          <li><strong>Vue 3:</strong> Un framework progresivo de JavaScript para construir interfaces de usuario. Progresivo porque puedes usar Vue para mejorar partes específicas de una aplicación (sin necesidad de reemplazar completamente el frontend).</li>
-          <li><strong>Vuetify:</strong> Un framework de componentes de Material Design para Vue.js. Es una librería de componentes de UI que sigue los principios de diseño de Material Design de Google. Ofrece una gran variedad de componentes predefinidos y personalizables (como botones, tarjetas, formularios, entre otros), facilitando la construcción de aplicaciones con una apariencia moderna y profesional.</li>
-          <li><strong>Vite:</strong> Un build tool moderno para proyectos de Vue.js, rápido gracias a que carga solo los módulos necesarios durante el desarrollo.</li>
-          <li><strong>Pinia:</strong> Un store de estado para Vue.js, útil en aplicaciones donde diferentes componentes necesitan compartir datos y sincronizarse.</li>
-          <li><strong>Axios:</strong> Una librería para hacer solicitudes HTTP, que te permite interactuar con APIs externas.</li>
+          <li><strong>Vue 3:</strong> Un framework progresivo de JavaScript para construir interfaces de usuario.</li>
+          <li><strong>Vuetify:</strong> Un framework de componentes de Material Design para Vue.js.</li>
+          <li><strong>Vite:</strong> Un build tool rápido y moderno para proyectos de Vue.js.</li>
+          <li><strong>Pinia:</strong> Un store de estado para Vue.js.</li>
+          <li><strong>Axios:</strong> Una librería para hacer solicitudes HTTP.</li>
         </ul>
         <h3>Contribuciones</h3>
         <p>
           Las contribuciones son bienvenidas. Si deseas contribuir, por favor sigue los siguientes pasos:
         </p>
         <ol>
-          <li>Haz un fork del proyecto y suma tus ideas a nuestro proyecto.</li>
-          <li>Crea una nueva rama a traves de (<code>git checkout -b feature/nueva-funcionalidad</code>).</li>
+          <li>Haz un fork del proyecto.</li>
+          <li>Crea una nueva rama (<code>git checkout -b feature/nueva-funcionalidad</code>).</li>
           <li>Realiza tus cambios y haz commit (<code>git commit -am 'Agrega nueva funcionalidad'</code>).</li>
-          <li>Haz push a la rama con (<code>git push origin feature/nueva-funcionalidad</code>).</li>
+          <li>Haz push a la rama (<code>git push origin feature/nueva-funcionalidad</code>).</li>
           <li>Abre un Pull Request.</li>
         </ol>
         <h3>Licencia</h3>
         <p>
-          Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo <code>LICENSE</code> para obtener más información en nuestra app.
+          Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo <code>LICENSE</code> para obtener más información.
         </p>
       </v-card-text>
     </v-card>
