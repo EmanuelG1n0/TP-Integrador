@@ -66,7 +66,7 @@ const submitLogin = async () => {
     if (authStore.isAdminGetter) {
       router.push('/admin');
     } else {
-      router.push('/home');
+      router.push('/');
     }
 
     alert('Inicio de sesión exitoso');

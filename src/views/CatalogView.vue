@@ -108,5 +108,5 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* Tus estilos aquí */
+
 </style>
