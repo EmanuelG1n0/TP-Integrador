@@ -30,18 +30,25 @@ const fetchUserDetails = async (userId) => {
   }
 };
 
-onMounted(() => {
-  if (!authStore.isAuthenticated) {
-    router.push('/login');
-  } else {
-    const userId = authStore.userId;
-    if (userId) {
-      fetchUserDetails(userId);
+onMounted(async () => {
+  try {
+    await authStore.fetchUser();  
+    if (!authStore.isAuthenticated) {
+      alert('No tienes permisos para acceder al panel de administración.');
+      router.push('/login');
     } else {
-      console.error('User ID is undefined');
-      alert('Error al obtener el ID del usuario.');
-    }
+      const userId = authStore.userId;
+      if (authStore.userId) {
+        fetchUserDetails(userId);
+      } else {
+        console.error('User ID is undefined');
+        alert('Error al obtener el ID del usuario.');
+    }} 
+  } catch (error) {
+    console.error('Error al verificar permisos de administrador:', error);
+    router.push('/home');
   }
+
 });
 
 const handleUpdate = (updatedUser) => {
